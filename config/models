@@ -1,6 +1,57 @@
-Cliente json
-    nome    Text
-    cpf     Text
-    salario Double
+Estado json
+    nomeEstado Text
+    deriving Show
+    
+Cidade json
+    nomeCidade Text
+    estadoId    EstadoId    
     deriving Show
 
+Bairro json
+    nomeBairro Text
+    cidadeId    CidadeId
+    deriving Show
+
+Logradouro json
+    nomeRua    Text
+    numeroCasa Text
+    bairroId    BairroId
+    deriving Show
+
+Prestador json
+    cpfPrest    Text
+    senhaPrest  Text
+    nomePrest   Text
+    emailPrest  Text
+    telPrest    Text
+    curriculoPrest  Text
+    logradouroId    LogradouroId
+    deriving Show
+
+Profissao json
+    nomeProfissao Text
+    deriving Show
+    
+Prest_Profi json
+    profissaoId ProfissaoId
+    prestadorId PrestadorId
+    deriving Show
+    
+Denuncia json
+    dsDenuncia  Text
+    dtDenuncia  Day
+    prestadorId PrestadorId
+    deriving Show
+
+Admin json
+    nomeAdmin Text
+    emailAdmin  Text
+    senhaAdmin  Text
+    deriving Show
+
+AdminDenuncia  json
+    denunciaId  DenunciaId
+    adminID AdminId
+    deriving Show
+    
+    
