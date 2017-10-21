@@ -3,7 +3,3 @@
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
-/cliente ClienteInsereR POST
-/cliente/#ClienteId/buscar BuscarR GET
-/cliente/#ClienteId/apagar ApagarR DELETE
-/cliente/#ClienteId/altera AlteraR PUT
