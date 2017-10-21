@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <style>
+       #map {
+        height: 550px;
+        width: 100%;
+       }
+       #busca{
+        position: absolute;
+        top: 550px;
+       }
+    </style>
+    <!--left:33%;-->
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Service Provider Finder</title>
+
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link href="./css/freelancer.css" rel="stylesheet">
+
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body id="page-top" class="index">
+<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">SPF</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="entrar.html">Minha Conta</a>
+                    </li>
+                    <li>
+                        <a href="cadastro.html">Cadastre-se</a>
+                    </li>
+					<li>
+                        <a href="contato.html">Contato</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                var geocoder = new google.maps.Geocoder();
+                var endereco ="Guarujá, São Paulo, Brasil";
+                var posicao;
+                var marcador = "marcador.png";
+                var medialat=0;
+                var medialong=0;
+
+                var nome= "Marcos";
+                var servico = "Eletricista";
+                var telefone = "(13) 3377-7666";
+
+                geocoder.geocode( { 'address': endereco}, function(results, status) {
+
+                  if (status == google.maps.GeocoderStatus.OK) {
+                    posicao = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
+                    criaMapa();
+                  }
+                });    
+
+                function criaMapa(){
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 13,
+                        center: posicao
+                    });
+
+                    var marker = new google.maps.Marker({
+                        position: posicao,
+                        map: map,
+                        icon: marcador
+                    });
+
+                    var informacao = "<div id=info><h3>"+nome+"</h3><br><b>Servico: </b>"+servico+"<br><b>Telefone: </b>"+telefone+"<br><b>Endereço: </b>"+endereco+" </div>";
+
+                    var infowindow = new google.maps.InfoWindow({
+                      content: informacao
+                    });
+
+                    marker.addListener('click', function() {
+                        infowindow.open(map, marker);                     
+                    });
+
+                }
+            }
+        </script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeOjMtwy0vXBK5MlFaU4wxf8qRV_ys7Gk&callback=initMap">
+        </script>
+        <div id="busca">
+            <div class="row">
+                <div class="col-col-lg-8 col-lg-offset-6">
+                    <form>
+                        <select id="selecao-busca" class="selectpicker" required >
+                          <option value="" disabled selected hidden>Tipo de Busca</option> 
+                          <option id="escolha" name ="escolha" value="Profissao">Profissão</option>
+                          <option id="escolha" name ="escolha" value="Logradouro">Logradouro</option>
+                          <option id="escolha" name ="escolha" value="Nome">Nome do Prestador</option>
+                        </select> 
+                        <input id="texto-busca"  type="text" placeholder="digite o endereço">                
+                        <button id="botao-busca" name="botao-busca" type="submit">Pesquisar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+            <div class="col-lg-12">
+                <div class="container" id="maincontent" tabindex="-1">
+
+                    <div class="row">
+
+               
+                    <img class="img-responsive" src="img/profile.png" alt="">
+                        <div class="intro-text">
+                            <h1 class="name">spf </h1>
+                            <hr class="star-light">
+                            <span class="skills">Service Provider Finder - Seu serviço de conexão cliente-trabalhador autonomo</span>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Grid Section --><!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Sobre</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>O Service Provider Finder é um sistema que busca divulgar o perfil de prestadores de serviços independentes, facilitando a comunicação entre estes profissionais e seus potenciais clientes.</p><br>
+                    Após o cadastro do currículo do profissional, o perfil deste é inserido no catálogo.
+                    
+                </div>
+                <div class="col-lg-4 ">
+                    <p>   Um usuário que busca contratar determinado serviço pode buscar no sistema um profissional em sua região, filtrando por avaliações e área de atuação!</p><br>
+                    Após a prestação do serviço, o cliente pode avaliar o profissional, dando mais visibilidade ao seu perfil.
+                </div>
+
+                <div class="col-lg-8 col-lg-offset-2">
+                    <br><br><br>
+                    Caso haja algum desentendimento entre cliente e prestador, os administradores podem intervir, para assim entender a situação e tomar as devidas providências
+                </div>
+
+            </div>
+        </div>
+</section>
+
+    
+
+    <!-- Footer -->
+    <footer class="text-center">
+        
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright Equipe SPF &copy;</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="./js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="./js/jqBootstrapValidation.js"></script>
+    <script src="./js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="./js/freelancer.min.js"></script>
+
+</body>
+
+</html>
