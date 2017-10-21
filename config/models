@@ -1,0 +1,6 @@
+Cliente json
+    nome    Text
+    cpf     Text
+    salario Double
+    deriving Show
+
