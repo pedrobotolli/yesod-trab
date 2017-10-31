@@ -30,8 +30,8 @@ getIndexR = defaultLayout $ do
                 <div class="container">
                     <div class="navbar-header page-scroll">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars">
-                        <a class="navbar-brand" href="#page-top">SPF</a>
+                            <span class="sr-only">Toggle navigation Menu <i class="fa fa-bars">
+                        <a class="navbar-brand" href="#page-top">SPF
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
@@ -41,7 +41,7 @@ getIndexR = defaultLayout $ do
                             <li>
                                 <a href="cadastro">Cadastre-se</a>
                             <li>
-                                <a href="contato">Contato</a>
+                                <a href="contato ">Contato</a>
             <header>
                 <div id="map">
                 <script>
@@ -90,7 +90,49 @@ getIndexR = defaultLayout $ do
                         }
                     }
                 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeOjMtwy0vXBK5MlFaU4wxf8qRV_ys7Gk&callback=initMap">
+                
+                <div class="col-lg-12">
+                    <div class="container" id="maincontent" tabindex="-1">
 
+                        <div class="row">
+                            <div class="intro-text">
+                                <h1 class="name">spf 
+                                <hr class="star-light">
+                                <span class="skills">Service Provider Finder - Seu serviço de conexão cliente-trabalhador autonomo
+
+
+                <section class="success" id="about">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2>Sobre
+                                <hr class="star-light">
+                        
+                    
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <p>
+                                    O Service Provider Finder é um sistema que busca divulgar o perfil de prestadores de serviços independentes, facilitando a comunicação entre estes profissionais e seus potenciais clientes.<br>
+                                    Após o cadastro do currículo do profissional, o perfil deste é inserido no catálogo.
+                            
+                       
+                            <div class="col-lg-4 ">
+                                <p>   
+                                    Um usuário que busca contratar determinado serviço pode buscar no sistema um profissional em sua região, filtrando por avaliações e área de atuação!</p><br>
+                                    Após a prestação do serviço, o cliente pode avaliar o profissional, dando mais visibilidade ao seu perfil.
+                        
+        
+                            <div class="col-lg-8 col-lg-offset-2">
+                                <br><br><br>
+                                Caso haja algum desentendimento entre cliente e prestador, os administradores podem intervir, para assim entender a situação e tomar as devidas providências
+                            
+            <footer class="text-center">
+                
+                <div class="footer-below">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Copyright Equipe SPF &copy;
     |]
     toWidget [lucius|
         #map {
