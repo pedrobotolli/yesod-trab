@@ -1,0 +1,101 @@
+        <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+            
+        <body id="page-top" class="index">
+            <div id="skipnav">
+                <a href="#maincontent">
+                    Skip to main content
+                
+            <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation Menu <i class="fa fa-bars">
+                        <a class="navbar-brand" href="#page-top">SPF
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="index">
+                                    Inicio
+                            <li>
+                                <a href="entrar">
+                                    Minha Conta
+                            <li>
+                                <a href="cadastro">
+                                    Cadastre-se
+                            <li>
+                                <a href="contato ">
+                                    Contato
+                                    
+            <section id="portfolio">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <br>
+                            <legend><h2>Cadastro de Prestador
+                
+
+                <br>
+                <div class="container">
+                    <form enctype="multipart/form-data" action="cadastrar_prestador.php" method="POST">
+                        <fieldset>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4">
+                                <label for="imagemPerfil" >Imagem de perfil 
+                                <br><br>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+                                <input type="file" id="idFileUpload" name="userfile" accept="image/png, image/jpg" >
+                    
+                            <div class="col-md-8">
+                                <label for="nomeUsuario">Nome
+                                <input type="text" class="form-control" name="nome" id="nomeUsuario" value="" required>
+                                <br>
+                                <label for="cpfUsuario">CPF
+                                <input type="text" class="form-control" name="CPF" id="cpfUsuario" onkeyup="digitarCPF()" value="" required>
+                    
+                
+                        <div class="row justify-content-center">                
+                            <div class="col-md-12">    
+                                <br>
+                                <label for="emailUsuario">Email
+                                <input type="email" class="form-control" name="email" id="emailUsuario" value="" required>
+                                <br>
+                                <label>CEP
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="cep" name="endereco" onkeydown="cepErrado()" value="" required>
+                                            <span class="input-group-btn">
+                                            <button type="button" id="btVerificar" class="btn btn-primary">Verificar
+                                    
+                                
+                            
+                        
+                                <input type="hidden" id="endereco" name="endComp" value="">
+                                <input type="hidden" id="latitude" name="lat" value="">
+                                <input type="hidden" id="longitude" name="lng" value="" >
+                                <br>
+                                <label>Numero
+                                <input type="text" class="form-control" name="numero" value="" required>
+                                <br>
+                                <label>Telefone
+                                <input type="text" class="form-control" name="telefone" value="" required>
+                                <br>
+                                
+                                
+                                <label>Profissão
+                                <div class="input-group">
+                                    <select id="profissao" name="profissao" class="form-control">
+                                
+                                    <span class="input-group-btn"><button type="button" class="btn btn-primary">Verificar
+                            
+                            
+                                <br>
+                                <label>Descrição
+                                <textarea class="form-control" name="curriculo" rows="4" cols="50" required>
+                            
+                                <br>
+                                <button type="reset" class="btn btn-secondary btn-lg pull-right">Redefinir
+                                <button type="submit" id="btEnviar" class="btn btn-primary btn-lg pull-right" disabled>Enviar

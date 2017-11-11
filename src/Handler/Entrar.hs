@@ -6,8 +6,6 @@
 module Handler.Entrar where
 
 import Import
-import Foundation
-import Yesod.Core
 -- import Network.HTTP.Types.Status
 -- import Database.Persist.Postgresql
 
