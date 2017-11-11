@@ -3,7 +3,15 @@
 /favicon.png FaviconR GET
 /robots.txt RobotsR GET
 
-/user     UserInserirR POST
-/user/#UserId/busca BuscaR GET
-/user/#UserId/altera AlteraR PATCH
-/user/#UserId/apagar ApagarR
+/                       HomeR               GET
+/paglogin               PagLogarR           GET
+/pagCadastro            PagCadastrarR       GET
+/pagBusca               PagBuscarR          GET
+/pagDenuncia            PagDenunciarR       GET
+/pagPerfil              PagPerfilR          GET
+
+/user                   UserInserirR        POST
+/user/#UserId/busca     BuscaR              GET
+/user/#UserId/altera    AlteraR             PATCH
+/user/#UserId/apagar    ApagarR
+/user/#UserId/denunciar DenunciarR          POST
