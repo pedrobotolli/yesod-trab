@@ -49,5 +49,24 @@ getDenunciaR = do
         addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/denuncia.hamlet")
+        
+getPagLoginR :: Handler Html
+getPagLoginR = do
+    defaultLayout $ do
+        addStylesheet $ StaticR css_freelancer_css
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/paglogin.hamlet")
     
-
+getBuscaR :: Handler Html
+getBuscaR = do
+    defaultLayout $ do
+        addStylesheet $ StaticR css_freelancer_css
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/busca.hamlet")
+        
+getPerfilR :: Handler Html
+getPerfilR = do
+    defaultLayout $ do
+        addStylesheet $ StaticR css_freelancer_css
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/perfil.hamlet")

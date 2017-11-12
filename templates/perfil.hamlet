@@ -1,0 +1,93 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+
+<body id="page-top" class="index">
+    <div id="skipnav">
+        <a href="#maincontent">Skip to main content
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+            <div class="container">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation Menu <i class="fa fa-bars">
+                    <a class="navbar-brand" href="index.html">Inicio
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="index">
+                                Inicio
+                        <li>
+                            <a href="entrar">
+                                    Minha Conta
+                        <li>
+                            <a href="cadastro">
+                                    Cadastre-se
+                        <li>
+                            <a href="contato ">
+                                    Contato
+        <section id="portfolio">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Perfil
+                <div class="col-lg-12">
+                    <fieldset>
+                        <div style="float:left;width:30%;">
+                            <div id="map">
+                        <div style="float:left;width:70%;">
+                            <p>
+                                <form method="post" name="formulario">
+                                    <div class="container">
+                                        <img src="" width="150" height="150">
+                                        <div class="col-md-12">
+                                            <label>Nome
+                                            <input type="text" name="nome" class="form-control" readonly>
+                                            <br>
+                                            <label>CPF
+                                            <input type="text" name="cpf" class="form-control" readonly>
+                                            <br>
+                                        <div class="col-md-12">
+                                            <label>Email
+                                            <input type="text" name="email" class="form-control">
+                                            <br>
+                                            <label>Telefone
+                                            <input type="text" name="telefone" class="form-control" readonly>
+                                            <br>
+                                        <div class="col-md-12">
+                                            <label>Profissao
+                                            <input type="text" class="form-control" name="profissao" readonly>
+                                            <br>
+                                            <label>CEP
+                                            <input type="text" class="form-control" name="endereco" readonly>
+                                            <br>
+                                        <div class="col-md-12">
+                                            <label>Numero
+                                            <input type="text" class="form-control" name="numero" readonly>
+                                            <br>
+                                            <label>Descrição
+                                            <textarea name="curriculo" class="form-control" rows="10" cols="50" readonly> 
+                                            <br>
+                                            <textarea name="curriculo" rows="10" cols="50" readonly>
+                                            <br>
+                                            <input type="submit" class="btn btn-primary btn-lg pull-right" value="Solicitar Serviço">
+                                            <input type="submit" class="btn btn-primary btn-lg pull-right" value="Denunciar">
+                                <form>
+                                    <input type="submit" class="btn btn-primary btn-lg pull-right" value="Indicar">
+                                <br>
+        <footer class="text-center">
+            <div class="footer-above">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-col col-md-4">
+                            <h3>Criadores
+                            <p>Equipe SPF
+                        <div class="footer-col col-md-4">
+                            <h3>Sobre o SPF
+                            <p>Service Provider Finder é uma ferramenta gratuita que ajuda pessoas a acharem um profissional para ajudá-las
+            <div class="footer-below">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            Copyright &copy;Corporation
+      

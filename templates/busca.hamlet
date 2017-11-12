@@ -1,0 +1,63 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+
+<body id="page-top" class="index">
+    <div id="skipnav">
+        <a href="#maincontent">Skip to main content
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation Menu <i class="fa fa-bars">
+                <a class="navbar-brand" href="index.html">Inicio
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index">
+                            Inicio
+                    <li>
+                        <a href="entrar">
+                                Minha Conta
+                    <li>
+                        <a href="cadastro">
+                                Cadastre-se
+                    <li>
+                        <a href="contato ">
+                                Contato
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Busca
+                    <div class="col-lg-12 text-center">
+                        <form>
+                            <fieldset>
+                                <legend>Barra de Pesquisa
+                                <p>
+                                    <input type="text" id="pesquisa" name="pesquisa" value="" />
+                                    <input type="reset" />
+                                    <input type="submit" /><br>
+                                    <input type="radio" id="escolha" name="escolha" value="Profissao" checked>Profissão<br>
+                                    <input type="radio" id="escolha" name="escolha" value="Logradouro">Logradouro<br>
+                                    <input type="radio" id="escolha" name="escolha" value="Nome">Nome do Profissional<br>
+                                    <input type="radio" id="escolha" name="escolha" value="Cliente">Cliente<br>
+                <div class="row">
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Criadores
+                        <p>Equipe SPF
+                    <div class="footer-col col-md-4">
+                        <h3>Sobre o SPF
+                        <p>Service Provider Finder é uma ferramenta gratuita que ajuda pessoas a acharem um profissional para ajudá-las
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy;Corporation
+  

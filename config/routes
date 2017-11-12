@@ -4,7 +4,9 @@
 /robots.txt RobotsR GET
 
 /                       HomeR               GET 
-
+/paglogin               PagLoginR           GET
 /cadprest               CadPrestR           GET
 /novasenha              NovaSenhaR          GET
 /denuncia               DenunciaR           GET
+/Busca                  BuscaR             GET
+/Perfil                 PerfilR             GET
