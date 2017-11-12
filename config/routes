@@ -6,3 +6,5 @@
 /                       HomeR               GET 
 
 /cadprest               CadPrestR           GET
+/novasenha              NovaSenhaR          GET
+/denuncia               DenunciaR           GET

@@ -35,5 +35,19 @@ getCadPrestR = do
         addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/cad-prest.hamlet")
+        
+getNovaSenhaR :: Handler Html
+getNovaSenhaR = do
+    defaultLayout $ do
+        addStylesheet $ StaticR css_freelancer_css
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/novasenha.hamlet")
+        
+getDenunciaR :: Handler Html
+getDenunciaR = do
+    defaultLayout $ do
+        addStylesheet $ StaticR css_freelancer_css
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/denuncia.hamlet")
     
 
