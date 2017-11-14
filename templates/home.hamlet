@@ -17,13 +17,17 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="index">Inicio</a>
+                                <a href="@{HomeR}">
+                                    Inicio
                             <li>
-                                <a href="entrar">Minha Conta</a>
+                                <a href="@{PagLoginR}">
+                                    Minha Conta
                             <li>
-                                <a href="cadastro">Cadastre-se</a>
+                                <a href="@{CadPrestR}">
+                                    Cadastre-se
                             <li>
-                                <a href="contato">Contato</a>
+                                <a href="@{ContatoR}">
+                                    Contato
             <header>
                 <div id="map">
                 <script>

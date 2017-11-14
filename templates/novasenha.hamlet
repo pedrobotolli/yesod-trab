@@ -15,16 +15,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="index">
+                        <a href="@{HomeR}">
                             Inicio
                     <li>
-                        <a href="entrar">
+                        <a href="@{PagLoginR}">
                                 Minha Conta
                     <li>
-                        <a href="cadastro">
+                        <a href="@{CadPrestR}">
                                 Cadastre-se
                     <li>
-                        <a href="contato ">
+                        <a href="@{ContatoR}">
                                 Contato
     
     <section id="portfolio">

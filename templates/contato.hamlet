@@ -31,19 +31,26 @@
         <div class="container justify-content-center">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2>Login
+                    <h2>Contato
             <div class="row justify-content-center">
                 <div class="col-md-offset-4 col-md-4 text-center">
-                    <form action="logando.php">
+                    <form>
                         <fieldset>
-                            <legend>Faça seu login aqui
+                            <legend>Entre em contato conosco
                             <p>
-                                <label>Login
-                                <input type="text" name="login"  class="form-control" value="" />
+                                <label>Nome
+                                <input type="text" name="nome" class="form-control" value="" />
                             <p>
-                                <label>Senha
-                                <input type="password" class="form-control" name="senha" value="" />
-                            <button type="submit" class="btn btn-primary btn-lg">Entrar
+                                <label>E-mail
+                                <input type="text" class="form-control" name="email" value="" />
+                            <p>
+                                <label>Assunto
+                                <input type="text" class="form-control" name="assunto" value=""/>
+                            <p>
+                                <label>Mensagem
+                                <textarea class="form-control" name="mensagem" rows="10">
+                                    
+                            <button type="submit" class="btn btn-primary btn-lg">Enviar
     <footer class="text-center">
         <div class="footer-below">
             <div class="container">

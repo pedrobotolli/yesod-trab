@@ -10,3 +10,4 @@
 /denuncia               DenunciaR           GET
 /Busca                  BuscaR             GET
 /Perfil                 PerfilR             GET
+/contato                ContatoR            GET

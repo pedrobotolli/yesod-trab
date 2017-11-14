@@ -15,7 +15,8 @@ getHomeR :: Handler Html
 getHomeR = do
     defaultLayout $ do
         addStylesheet $ StaticR css_freelancer_css
-    
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/home.hamlet")
         toWidget $ 
             [lucius|
                 map{
@@ -70,3 +71,10 @@ getPerfilR = do
         addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/perfil.hamlet")
+        
+getContatoR :: Handler Html
+getContatoR = do
+    defaultLayout $ do
+        addStylesheet $ StaticR css_freelancer_css
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/contato.hamlet")
