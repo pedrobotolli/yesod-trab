@@ -30,13 +30,20 @@ getHomeR = do
             |]
         
     
-getCadPrestR :: Handler Html
-getCadPrestR = do 
+getPrestadorR :: Handler Html
+getPrestadorR = do 
     defaultLayout $ do
         addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/cad-prest.hamlet")
         
+postPrestadorR :: Handler TypedContent
+postPrestadorR = do 
+        prestador <- (requireJsonBody :: Handler Prestador)
+        prestadorId <- runDB $ insert prestador
+        sendStatusJSON created201 $ object ["PrestadorId".=prestadorId]
+
+
 getNovaSenhaR :: Handler Html
 getNovaSenhaR = do
     defaultLayout $ do
@@ -50,6 +57,12 @@ getDenunciaR = do
         addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/denuncia.hamlet")
+        
+postDenunciaR :: Handler TypedContent
+postDenunciaR = do 
+        denuncia <- (requireJsonBody :: Handler Denuncia)
+        denunciaId <- runDB $ insert denuncia
+        sendStatusJSON created201 $ object ["PrestadorId".=denunciaId]
         
 getPagLoginR :: Handler Html
 getPagLoginR = do

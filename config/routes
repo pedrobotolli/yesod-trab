@@ -5,9 +5,10 @@
 
 /                       HomeR               GET 
 /paglogin               PagLoginR           GET
-/cadprest               CadPrestR           GET
+
+/prestador              PrestadorR          GET POST
 /novasenha              NovaSenhaR          GET
-/denuncia               DenunciaR           GET
-/Busca                  BuscaR             GET
+/denuncia               DenunciaR           GET POST
+/Busca                  BuscaR              GET
 /Perfil                 PerfilR             GET
 /contato                ContatoR            GET

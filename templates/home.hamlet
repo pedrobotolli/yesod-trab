@@ -23,7 +23,7 @@
                                 <a href="@{PagLoginR}">
                                     Minha Conta
                             <li>
-                                <a href="@{CadPrestR}">
+                                <a href="@{PrestadorR}">
                                     Cadastre-se
                             <li>
                                 <a href="@{ContatoR}">

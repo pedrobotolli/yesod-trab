@@ -1,0 +1,1 @@
+curl -X POST -v https://hasksigma-romefeller.c9users.io/prestador -d '{"cpfPrest":"12312312","senhaPrest":"123","nomePrest":"Teste","emailPrest":"narcisocabral.jr@gmail.com","telPrest":"23141412241","curriculoPrest":"EOQ","cepPrest":"12412414","numEndPrest":"124141"}'
