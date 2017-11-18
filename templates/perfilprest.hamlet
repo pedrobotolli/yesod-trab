@@ -40,8 +40,6 @@
                                     <label>Descrição
                                     <textarea name="curriculo" class="form-control" rows="10" cols="50" readonly> 
                                     <br>
-                                    <input type="submit" class="btn btn-primary btn-lg pull-right" value="Solicitar Serviço">
-                                    <input type="submit" class="btn btn-primary btn-lg pull-right" value="Denunciar">
+                                    <input type="submit" class="btn btn-primary btn-lg pull-right" value="Alterar Dados">
                         <form>
-                            <input type="submit" class="btn btn-primary btn-lg pull-right" value="Indicar">
                         <br>

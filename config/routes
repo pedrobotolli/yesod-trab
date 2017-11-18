@@ -3,12 +3,13 @@
 /favicon.png FaviconR GET
 /robots.txt RobotsR GET
 
-/                       HomeR               GET 
-/paglogin               PagLoginR           GET
-
-/prestador              PrestadorR          GET POST
-/novasenha              NovaSenhaR          GET
-/denuncia               DenunciaR           GET POST
-/Busca                  BuscaR              GET
-/Perfil                 PerfilR             GET
-/contato                ContatoR            GET
+/                                   HomeR               GET 
+/paglogin                           PagLoginR           GET
+/prestador                          PrestadorR          GET POST
+/novasenha                          NovaSenhaR          GET
+/denuncia                           DenunciaR           GET POST
+/busca                              BuscaR              GET POST
+/perfil                             PerfilR             GET
+/contato                            ContatoR            GET
+/alteracao/#PrestadorId             AlteracaoR          PUT
+/alteracao                          AlteracaogetR       GET 

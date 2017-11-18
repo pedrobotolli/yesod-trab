@@ -1,0 +1,60 @@
+$doctype 5
+<html>
+    <head>
+        <title>#{pageTitle pc}
+        <meta charset=utf-8>
+        <link rel="icon" href=@{FaviconR} type="image/x-icon">
+        <link href=@{StaticR css_freelancer_css} rel="stylesheet">
+        <link href=@{StaticR css_bootstrap_css} rel="stylesheet">
+        <link href=@{StaticR css_fontawesome_css} rel="stylesheet" type="text/css">
+        <link href=@{StaticR css_fontemont_css} rel="stylesheet" type="text/css">
+        <link href=@{StaticR css_fontelato_css} rel=",stylesheet" type="text/css">
+        ^{pageHead pc}
+        
+    <body id="page-top" class="index">
+        <div id="skipnav">
+            <a href="#maincontent">Skip to main content
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+            <div class="container">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation Menu 
+                            <i class="fa fa-bars">
+                    <a class="navbar-brand" href="@{HomeR}">
+                        Inicio
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="@{HomeR}">
+                                Inicio
+                        <li>
+                            <a href="@{PagLoginR}">
+                                    Minha Conta
+                        <li>
+                            <a href="@{PrestadorR}">
+                                    Cadastre-se
+                        <li>
+                            <a href="@{ContatoR}">
+                                    Contato
+                                    
+        ^{pageBody pc}
+        
+        
+        <footer class="text-center">
+            <div class="footer-below">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            Copyright SPF Corporation
+        <!-- jQuery -->
+        <script src=@{StaticR js_jquery_min_js}>
+    
+        <!-- Bootstrap Core JavaScript -->
+        <script src=@{StaticR js_bootstrap_min_js}>
+                
+                
+        <!-- Plugin JavaScript -->
+        <script src=@{StaticR js_jquery_easing_min_js}>
+                
+        <!-- Theme JavaScript -->
+        <script src=@{StaticR js_freelancer_min_js}>

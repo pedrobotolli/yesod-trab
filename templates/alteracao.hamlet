@@ -14,34 +14,32 @@
                                 <img src="" width="150" height="150">
                                 <div class="col-md-12">
                                     <label>Nome
-                                    <input type="text" name="nome" class="form-control" readonly>
+                                    <input type="text" name="nome" class="form-control">
                                     <br>
                                     <label>CPF
                                     <input type="text" name="cpf" class="form-control" readonly>
                                     <br>
                                 <div class="col-md-12">
                                     <label>Email
-                                    <input type="text" name="email" class="form-control" readonly>
+                                    <input type="text" name="email" class="form-control">
                                     <br>
                                     <label>Telefone
-                                    <input type="text" name="telefone" class="form-control" readonly>
+                                    <input type="text" name="telefone" class="form-control">
                                     <br>
                                 <div class="col-md-12">
                                     <label>Profissao
-                                    <input type="text" class="form-control" name="profissao" readonly>
+                                    <input type="text" class="form-control" name="profissao">
                                     <br>
                                     <label>CEP
-                                    <input type="text" class="form-control" name="endereco" readonly>
+                                    <input type="text" class="form-control" name="endereco">
                                     <br>
                                 <div class="col-md-12">
                                     <label>Numero
-                                    <input type="text" class="form-control" name="numero" readonly>
+                                    <input type="text" class="form-control" name="numero">
                                     <br>
                                     <label>Descrição
-                                    <textarea name="curriculo" class="form-control" rows="10" cols="50" readonly> 
+                                    <textarea name="curriculo" class="form-control" rows="10" cols="50"> 
                                     <br>
-                                    <input type="submit" class="btn btn-primary btn-lg pull-right" value="Solicitar Serviço">
-                                    <input type="submit" class="btn btn-primary btn-lg pull-right" value="Denunciar">
-                        <form>
-                            <input type="submit" class="btn btn-primary btn-lg pull-right" value="Indicar">
-                        <br>
+                                    <input type="submit" class="btn btn-primary btn-lg pull-right" value="Salvar Alteração">
+
+ 

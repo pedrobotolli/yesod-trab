@@ -1,59 +1,24 @@
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-
-<body id="page-top" class="index">
-    <div id="skipnav">
-        <a href="#maincontent">Skip to main content
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation Menu <i class="fa fa-bars">
-                <a class="navbar-brand" href="index.html">Inicio
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="@{HomeR}">
-                            Inicio
-                    <li>
-                        <a href="@{PagLoginR}">
-                                Minha Conta
-                    <li>
-                        <a href="@{PrestadorR}">
-                                Cadastre-se
-                    <li>
-                        <a href="@{ContatoR}">
-                                Contato
-
-    <section id="portfolio">
-        <div class="container justify-content-center">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h2>Contato
-            <div class="row justify-content-center">
-                <div class="col-md-offset-4 col-md-4 text-center">
-                    <form>
-                        <fieldset>
-                            <legend>Entre em contato conosco
-                            <p>
-                                <label>Nome
-                                <input type="text" name="nome" class="form-control" value="" />
-                            <p>
-                                <label>E-mail
-                                <input type="text" class="form-control" name="email" value="" />
-                            <p>
-                                <label>Assunto
-                                <input type="text" class="form-control" name="assunto" value=""/>
-                            <p>
-                                <label>Mensagem
-                                <textarea class="form-control" name="mensagem" rows="10">
-                                    
-                            <button type="submit" class="btn btn-primary btn-lg">Enviar
-    <footer class="text-center">
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright SPF Corporation
+<section id="portfolio">
+    <div class="container justify-content-center">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Contato
+        <div class="row justify-content-center">
+            <div class="col-md-offset-4 col-md-4 text-center">
+                <form>
+                    <fieldset>
+                        <legend>Entre em contato conosco
+                        <p>
+                            <label>Nome
+                            <input type="text" name="nome" class="form-control" value="" />
+                        <p>
+                            <label>E-mail
+                            <input type="text" class="form-control" name="email" value="" />
+                        <p>
+                            <label>Assunto
+                            <input type="text" class="form-control" name="assunto" value=""/>
+                        <p>
+                            <label>Mensagem
+                            <textarea class="form-control" name="mensagem" rows="10">
+                                
+                        <button type="submit" class="btn btn-primary btn-lg">Enviar

@@ -8,14 +8,20 @@ module Handler.Index where
 
 import Import
 import Text.Lucius
+import Text.Julius
+import Text.Hamlet
 -- import Network.HTTP.Types.Status
--- import Database.Persist.Postgresql
+import Database.Persist.Postgresql
+
 
 getHomeR :: Handler Html
 getHomeR = do
     defaultLayout $ do
-        addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
+        toWidgetHead [hamlet|
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeOjMtwy0vXBK5MlFaU4wxf8qRV_ys7Gk&callback=initMap">
+        |]
+        toWidget $(juliusFile "templates/home.julius")
         $(whamletFile "templates/home.hamlet")
         toWidget $ 
             [lucius|
@@ -29,11 +35,11 @@ getHomeR = do
                 }
             |]
         
-    
+
 getPrestadorR :: Handler Html
 getPrestadorR = do 
+    buscaprof <- runDB $ selectList [] [] :: Handler [Entity Profissao]
     defaultLayout $ do
-        addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/cad-prest.hamlet")
         
@@ -47,14 +53,12 @@ postPrestadorR = do
 getNovaSenhaR :: Handler Html
 getNovaSenhaR = do
     defaultLayout $ do
-        addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/novasenha.hamlet")
         
 getDenunciaR :: Handler Html
 getDenunciaR = do
     defaultLayout $ do
-        addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/denuncia.hamlet")
         
@@ -67,27 +71,48 @@ postDenunciaR = do
 getPagLoginR :: Handler Html
 getPagLoginR = do
     defaultLayout $ do
-        addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/paglogin.hamlet")
     
 getBuscaR :: Handler Html
 getBuscaR = do
     defaultLayout $ do
-        addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/busca.hamlet")
+        
+postBuscaR :: Handler TypedContent
+postBuscaR = do
+    busca <- (requireJsonBody :: Handler Prestador)
+    buscares <- runDB $ selectList [Filter PrestadorNomePrest (Left $ mconcat ["%",prestadorNomePrest busca,"%"]) (BackendSpecificFilter "ILIKE")] []
+    sendStatusJSON ok200 (object ["resp" .= (toJSON buscares)])
         
 getPerfilR :: Handler Html
 getPerfilR = do
     defaultLayout $ do
-        addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/perfil.hamlet")
         
 getContatoR :: Handler Html
 getContatoR = do
     defaultLayout $ do
-        addStylesheet $ StaticR css_freelancer_css
         setTitle "Service Provider Finder"
         $(whamletFile "templates/contato.hamlet")
+        
+getAlteracaogetR :: Handler Html
+getAlteracaogetR = do
+    defaultLayout $ do
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/alteracao.hamlet")
+        
+--patchAlteracaoR :: PrestadorId -> Text -> Handler Value
+--patchAlteracaoR pid texto = do
+--       _ <- runDB $ get404 pid
+--      runDB $ update pid [PrestadorNomePrest =. texto]
+--        sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
+putAlteracaoR :: PrestadorId -> Handler Value
+putAlteracaoR pid = do
+    _ <- runDB $ get404 pid
+    alteraPrestador <- requireJsonBody :: Handler Prestador
+    runDB $ replace pid alteraPrestador
+    sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
+    
