@@ -53,6 +53,12 @@ postPrestadorR = do
         prestador <- (requireJsonBody :: Handler Prestador)
         prestadorId <- runDB $ insert prestador
         sendStatusJSON created201 $ object ["PrestadorId".=prestadorId]
+    
+postPrestProfiR :: Handler TypedContent
+postPrestProfiR = do 
+        prestprofi <- (requireJsonBody :: Handler PrestProfi)
+        prestprofiId <- runDB $ insert prestprofi
+        sendStatusJSON created201 $ object ["PrestProfiId".=prestprofiId]
 
 
 getNovaSenhaR :: Handler Html

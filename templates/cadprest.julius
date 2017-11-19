@@ -1,5 +1,23 @@
     $(document).ready(function() {
     console.log($("#nomePrest").val());
+    function cadastraprof(cdprof, cdprest)
+    {
+        var jsonprof = '{"profissaoId":'+cdprest+',' 
+                     + '"prestadorId":'+cdprof
+                     +'}';
+        console.log(jsonprof);
+         $.ajax({
+              url: "https://hasksigma-romefeller.c9users.io/prestprofi/",
+              method: "POST",
+              data: jsonprof,
+              success: function(result){
+                console.log(result);
+              },
+              error: function(result){
+                console.log(result);
+              }
+          });
+    }
      function cadastraprestador(){
           var cpf = $("#cpfPrest").val();
           var senha = $("#senhaPrest").val();
@@ -9,7 +27,7 @@
           var telefone = $("#telPrest").val();
           var curriculo = $("#curriculoPrest").val();
           var numero = $("#numEndPrest").val();
-          
+          var profissao = parseInt($("#profissao").val());
           var json = '{"cpfPrest":"'+cpf+'",'
                    + '"senhaPrest":"'+senha+'",'
                    + '"nomePrest":"'+nome+'",'
@@ -26,15 +44,19 @@
               method: "POST",
               data: json,
               success: function(result){
-                console.log("Deu bom");
+                var prestador = parseInt(result["PrestadorId"]);
+                cadastraprof(prestador,profissao);
+                console.log(result);
               },
               error: function(result){
-                console.log("Deu ruim");
+                console.log(result);
               }
           });
+
         }
         $("#btEnviar").click(function() {
           cadastraprestador();
         });
         console.log("sagdfadf");
+        
     });
