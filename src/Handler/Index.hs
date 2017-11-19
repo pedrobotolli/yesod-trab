@@ -116,3 +116,22 @@ putAlteracaoR pid = do
     runDB $ replace pid alteraPrestador
     sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
     
+getRecuperacaoR :: Handler Html
+getRecuperacaoR = do
+    defaultLayout $ do
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/recuperacao.hamlet")
+        
+getPerfilPrestR :: Handler Html
+getPerfilPrestR = do
+    defaultLayout $ do
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/perfilprest.hamlet")
+        
+        
+getAdmR :: Handler Html
+getAdmR = do
+    defaultLayout $ do
+        setTitle "Service Provider Finder"
+        $(whamletFile "templates/adm.hamlet")
+    

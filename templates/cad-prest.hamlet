@@ -8,7 +8,7 @@
 
     <br>
     <div class="container">
-        <form enctype="multipart/form-data" action="@{PrestadorR}" method="POST">
+        <form enctype="application/json" action="@{PrestadorR}" method=post>
             <fieldset>
             <div class="row justify-content-center">
                 <div class="col-md-4">
@@ -19,38 +19,39 @@
         
                 <div class="col-md-8">
                     <label for="nomePrest">Nome
-                    <input type="text" class="form-control" name="nomePrest" id="nomePrest" value="" required>
+                    <input type="text" class="form-control" name="nomePrest" id="nomePrest" required>
                     <br>
                     <label for="cpfPrest">CPF
-                    <input type="text" class="form-control" name="cpfPrest" id="cpfPrest" onkeyup="digitarCPF()" value="" required>
+                    <input type="text" class="form-control" name="cpfPrest" id="cpfPrest" onkeyup="digitarCPF()" required>
         
     
             <div class="row justify-content-center">                
                 <div class="col-md-12">    
                     <br>
                     <label for="emailPrest">Email
-                    <input type="email" class="form-control" name="emailPrest" id="emailPrest" value="" required>
+                    <input type="email" class="form-control" name="emailPrest" id="emailPrest" required>
                     <br>
                     <label>CEP
                     <div class="row justify-content-center">
                         <div class="col-lg-12">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="cep" name="endereco" onkeydown="cepErrado()" value="" required>
+                                <input type="text" class="form-control" id="cepPrest" name="cepPrest" onkeydown="cepErrado()" required>
                                 <span class="input-group-btn">
                                 <button type="button" id="btVerificar" class="btn btn-primary">Verificar
                         
                     
                 
             
-                    <input type="hidden" id="endereco" name="endComp" value="">
-                    <input type="hidden" id="latitude" name="lat" value="">
-                    <input type="hidden" id="longitude" name="lng" value="" >
+                    <input type="hidden" id="endereco" name="endComp">
+                    <input type="hidden" id="latitude" name="lat">
+                    <input type="hidden" id="longitude" name="lng" >
                     <br>
                     <label>Numero
-                    <input type="text" class="form-control" name="numEndPrest" id="numEndPrest" value="" required>
+                    <input type="text" class="form-control" name="numEndPrest" id="numEndPrest" required>
                     <br>
                     <label>Telefone
-                    <input type="text" class="form-control" name="telPrest" id="telPrest" value="" required>
+                    <input type="text" class="form-control" name="telPrest" id="telPrest" required>
+                    <input type="hidden" class="form-control" name="senhaPrest" id="senhaPrest" value="123">
                     <br>
                     
                     
@@ -64,7 +65,7 @@
                 
                     <br>
                     <label>Descrição
-                    <textarea class="form-control" name="curriculo" rows="4" cols="50" required>
+                    <textarea class="form-control" name="curriculoPrest" id="curriculoPrest" rows="4" cols="50" required>
                 
                     <br>
                     <button type="reset" class="btn btn-secondary btn-lg pull-right">Redefinir

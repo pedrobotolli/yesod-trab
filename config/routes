@@ -13,3 +13,6 @@
 /contato                            ContatoR            GET
 /alteracao/#PrestadorId             AlteracaoR          PUT
 /alteracao                          AlteracaogetR       GET 
+/adm                                AdmR                GET
+/recuperacao                        RecuperacaoR        GET
+/perfilprest                        PerfilPrestR        GET

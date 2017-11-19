@@ -9,7 +9,7 @@
                     <div id="map">
                 <div style="float:left;width:70%;">
                     <p>
-                        <form method="post" name="formulario">
+                        <form method=post name="formulario">
                             <div class="container">
                                 <img src="" width="150" height="150">
                                 <div class="col-md-12">

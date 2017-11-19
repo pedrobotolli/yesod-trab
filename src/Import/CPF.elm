@@ -40,23 +40,21 @@ validarCPF cpf =
                 then FALSE
                 else 
                 for (i=0; i < 9; i ++)       
-                add += parseInt(cpf.charAt(i)) * (10 - i);  
-                var rev = 11 - (add % 11);  
-                if (rev == 10 || rev == 11) then  
+                  add += parseInt(cpf.charAt(i)) * (10 - i);  
+                  var rev = 11 - (add % 11);  
+                  if (rev == 10 || rev == 11) then  
+                      rev = 0;    
+                  if (rev != parseInt(cpf.charAt(9)))  then   
+                      return false;       
+                add = 0;    
+                for (i = 0; i < 10; i ++)        
+                  add += parseInt(cpf.charAt(i)) * (11 - i);  
+                  rev = 11 - (add % 11);  
+                  if (rev == 10 || rev == 11) then
                     rev = 0;    
-                if (rev != parseInt(cpf.charAt(9)))  then   
-                    return false;       
-            // Valida 2o digito 
-            add = 0;    
-            for (i = 0; i < 10; i ++)        
-                add += parseInt(cpf.charAt(i)) * (11 - i);  
-            rev = 11 - (add % 11);  
-            if (rev == 10 || rev == 11) then
-                rev = 0;    
-            if (rev != parseInt(cpf.charAt(10))) then
-                return false;
-                
-            return true;  
+                  if (rev != parseInt(cpf.charAt(10))) then
+                    return false;
+                return true;  
 
 updateView : Msg -> Model -> Model
 updateView action model =
@@ -65,18 +63,15 @@ updateView action model =
       { model | cpf = x }
     
     Validar ->
-      { model | res = model.nome ++ "seu IMC é de: " ++ toString (calculoImc model.peso model.altura) ++ " e indica que voce e " ++ (imc model.peso model.altura ) }
+      { model | res = validarCPF x }
 
 -- VIEW
 
 viewSoma : Model -> Html Msg
 viewSoma model =
   div []
-    [ input [ type_ "text", step "0.01", style [("color", "blue"),("margin-left","40%"),("margin-top","100px"), ("width","125px"),("height","50px"),("text-align","center")], placeholder "Digite seu nome", onInput Campo1] []
+    [ input [ type_ "text", step "0.01", style [("color", "blue"),("margin-left","40%"),("margin-top","100px"), ("width","125px"),("height","50px"),("text-align","center")], placeholder "Digite seu CPF", onInput CampoCPF] []
     , br [] []
-    , input [ type_ "number", step "0.01", style [("color", "blue"),("margin-left","40%"), ("width","125px"),("height","50px"),("text-align","center")], placeholder "Digite sua altura", onInput Campo2] []
-    , br [] []
-    , input [ type_ "number", step "0.01", style [("color", "blue"),("margin-left","40%"), ("width","125px"),("height","50px"),("text-align","center")], placeholder "Digite seu peso", onInput Campo3] []
     , button [onClick Calcular,style [("color", "red"),("margin-left","50px"), ("width","125px"),("height","50px"),("text-align","center")]] [text "OK"]
     , br [] []
     , div[style [("color", "red"),("margin-left","40%"), ("width","125px"),("height","50px"), ("margin-top","50px")]] [text (toString model.res)]
