@@ -1,0 +1,40 @@
+    $(document).ready(function() {
+    console.log($("#nomePrest").val());
+     function cadastraprestador(){
+          var cpf = $("#cpfPrest").val();
+          var senha = $("#senhaPrest").val();
+          var cep = $("#cepPrest").val();
+          var nome = $("#nomePrest").val();
+          var email = $("#emailPrest").val();
+          var telefone = $("#telPrest").val();
+          var curriculo = $("#curriculoPrest").val();
+          var numero = $("#numEndPrest").val();
+          
+          var json = '{"cpfPrest":"'+cpf+'",'
+                   + '"senhaPrest":"'+senha+'",'
+                   + '"nomePrest":"'+nome+'",'
+                   + '"emailPrest":"'+email+'",'
+                   + '"telPrest":"'+telefone+'",'
+                   + '"curriculoPrest":"'+curriculo+'",'
+                   + '"cepPrest":"'+cep+'",'
+                   + '"numEndPrest":"'+numero+'"'
+                   + '}';
+          console.log(json);
+        
+          $.ajax({
+              url: "https://hasksigma-romefeller.c9users.io/prestador/",
+              method: "POST",
+              data: json,
+              success: function(result){
+                console.log("Deu bom");
+              },
+              error: function(result){
+                console.log("Deu ruim");
+              }
+          });
+        }
+        $("#btEnviar").click(function() {
+          cadastraprestador();
+        });
+        console.log("sagdfadf");
+    });

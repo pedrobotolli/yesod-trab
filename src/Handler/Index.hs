@@ -1,9 +1,9 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeFamilies, DeriveGeneric #-}
 module Handler.Index where
 
 import Import
@@ -34,13 +34,18 @@ getHomeR = do
                     top: 550px;
                 }
             |]
-        
+      
 
+    
 getPrestadorR :: Handler Html
 getPrestadorR = do 
     buscaprof <- runDB $ selectList [] [] :: Handler [Entity Profissao]
     defaultLayout $ do
         setTitle "Service Provider Finder"
+        toWidgetHead [hamlet|
+        <script src="/static/jquery-3.2.1.min.js">
+        |]
+        toWidget $(juliusFile "templates/cadprest.julius")
         $(whamletFile "templates/cad-prest.hamlet")
         
 postPrestadorR :: Handler TypedContent
