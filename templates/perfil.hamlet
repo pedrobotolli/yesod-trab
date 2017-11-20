@@ -24,7 +24,7 @@
                                     <input type="text" name="telefone" class="form-control" value=#{prestadorTelPrest prestador} readonly>
                                     <br>
                                 <div class="col-md-12">
-                                    <label>Profissao
+                                    <label>Profissões
                                     $forall x <- profissoes
                                         <input type="text" class="form-control" name="profissao" value=#{profissaoNomeProfissao x} readonly>
                                     <br>

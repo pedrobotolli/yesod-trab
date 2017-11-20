@@ -162,10 +162,10 @@ postBuscaR = do
 getPerfilR :: PrestadorId -> Handler Html
 getPerfilR pid = do
     prestador <- runDB $ get404 pid
-    lista' <- runDB $ selectList [PrestProfiPrestadorId ==. pid] [] :: Handler [Entity PrestProfi]
-    lista <- return $ fmap (\(Entity _ prof) -> prof) lista'
-    profids <- return $ fmap prestProfiProfissaoId lista
-    profissoes <- sequence $ fmap (\prid -> runDB $ get404 prid) profids
+    prestprof' <- runDB $ selectList [PrestProfiPrestadorId ==. pid] [] :: Handler [Entity PrestProfi]
+    prestprof <- return $ fmap (\(Entity _ prof) -> prof) prestprof' --Handler [PrestProfi]
+    profids <- return $ fmap prestProfiProfissaoId prestprof -- [Handler Profissao]
+    profissoes <- sequence $ fmap (\prid -> runDB $ get404 prid) profids --Handler [Profissao]
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/perfil.hamlet")
@@ -204,7 +204,10 @@ getRecuperacaoR = do
 getPerfilPrestR :: PrestadorId -> Handler Html
 getPerfilPrestR pid = do
     prestador <- runDB $ get404 pid
-    sendStatusJSON ok200 (object ["resp" .= (toJSON prestador)])
+    prestprof' <- runDB $ selectList [PrestProfiPrestadorId ==. pid] [] :: Handler [Entity PrestProfi]
+    prestprof <- return $ fmap (\(Entity _ prof) -> prof) prestprof' --Handler [PrestProfi]
+    profids <- return $ fmap prestProfiProfissaoId prestprof -- [Handler Profissao]
+    profissoes <- sequence $ fmap (\prid -> runDB $ get404 prid) profids --Handler [Profissao]
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/perfilprest.hamlet")

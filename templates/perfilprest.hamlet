@@ -14,31 +14,32 @@
                                 <img src="" width="150" height="150">
                                 <div class="col-md-12">
                                     <label>Nome
-                                    <input type="text" name="nome" class="form-control" readonly>
+                                    <input type="text" name="nome" class="form-control" value=#{prestadorNomePrest prestador} readonly>
                                     <br>
                                     <label>CPF
-                                    <input type="text" name="cpf" class="form-control" readonly>
+                                    <input type="text" name="cpf" class="form-control" value=#{prestadorCpfPrest prestador} readonly>
                                     <br>
                                 <div class="col-md-12">
                                     <label>Email
-                                    <input type="text" name="email" class="form-control" readonly>
+                                    <input type="text" name="email" class="form-control" value=#{prestadorEmailPrest prestador} readonly>
                                     <br>
                                     <label>Telefone
-                                    <input type="text" name="telefone" class="form-control" readonly>
+                                    <input type="text" name="telefone" class="form-control" value=#{prestadorTelPrest prestador} readonly>
                                     <br>
                                 <div class="col-md-12">
-                                    <label>Profissao
-                                    <input type="text" class="form-control" name="profissao" readonly>
+                                    <label>Profissões
+                                    $forall x <- profissoes
+                                        <input type="text" class="form-control" name="profissao" value=#{profissaoNomeProfissao x} readonly>
                                     <br>
                                     <label>CEP
-                                    <input type="text" class="form-control" name="endereco" readonly>
+                                    <input type="text" class="form-control" name="endereco" value=#{prestadorCepPrest prestador} readonly>                                    
                                     <br>
                                 <div class="col-md-12">
                                     <label>Numero
-                                    <input type="text" class="form-control" name="numero" readonly>
+                                    <input type="text" class="form-control" name="numero" value=#{prestadorNumEndPrest prestador} readonly>
                                     <br>
                                     <label>Descrição
-                                    <textarea name="curriculo" class="form-control" rows="10" cols="50" readonly> 
+                                    <textarea name="curriculo" class="form-control" rows="10" cols="50" readonly> #{prestadorCurriculoPrest prestador}
                                     <br>
                                     <input type="submit" class="btn btn-primary btn-lg pull-right" value="Alterar Dados">
                         <form>
