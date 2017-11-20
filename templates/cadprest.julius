@@ -56,7 +56,9 @@
         }
         $("#btEnviar").click(function() {
           cadastraprestador();
+          window.location = "https://hasksigma-romefeller.c9users.io/";
+
+          
         });
-        console.log("sagdfadf");
-        
+
     });

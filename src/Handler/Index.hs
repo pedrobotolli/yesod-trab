@@ -10,9 +10,8 @@ import Import
 import Text.Lucius
 import Text.Julius
 import Text.Hamlet
--- import Network.HTTP.Types.Status
+import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
-
 
 getHomeR :: Handler Html
 getHomeR = do
@@ -34,25 +33,88 @@ getHomeR = do
                     top: 550px;
                 }
             |]
-      
+
+
+data TipoCadastro = TipoCadastro
+    { cpf :: Text
+    , senha :: Text
+    , nome :: Text
+    , email :: Text
+    , telefone :: Text
+    , profissao :: Text
+    , curriculo :: Text
+    , cep :: Text
+    , numero :: Text
+    } deriving Show
+
+--data TipoPrestProfi = TipoPrestProfi
+--    { cpf :: Text
+--    , profissao :: Text
+--    } deriving Show
+
+
+
+--formCadastro :: Html -> MForm Handler (FormResult TipoCadastro, Widget)
+--formCadastro = renderDivs $ TipoCadastro
+--   <$> areq textField "Cpf: " Nothing
+--    <*> areq passwordField "Senha: " Nothing
+--    <*> areq textField "Nome: " Nothing
+--    <*> areq emailField "Email: " Nothing
+--    <*> areq textField "Telefone:" Nothing
+--    <*> areq (selectFieldList profissao) "Profissao: " Nothing
+--    <*> areq textField "Curriculo:" Nothing
+--    <*> areq textField "Cep: " Nothing
+--    <*> areq textField "Numero: " Nothing
+--    where
+--        profissao :: [(nomeProfissao, ProfissaoId)]
+--        profissao = do
+--            buscaprof <- runDB $ selectList [] [] :: Handler [Entity Profissao]
+--            options <- map (\prof -> (profissaoNomeProfissao $ entityVal prof, fromSqlKey $ entityKey prof)) buscaprof
+--            return options
+
 
     
+
+
+    
+--getPrestadorR :: Handler Html
+--getPrestadorR = do
+--   (widget, enctype) <- generateFormPost formCadastro
+--    defaultLayout $ do
+--        [whamlet|
+--            <br><br>
+--           <form action=@{PrestadorR} method=post enctype=#{enctype}>
+--                ^{widget}
+--                <input type="submit" value="Enviar">
+--        |]
+
+--postPrestadorR :: Handler Html
+--postPrestadorR = do
+--    ((result,_),_) <- runFormPost formCadastro
+--    case result of
+--        FormSuccess prestador -> do
+--            runDB $ insert prestador
+--            redirect PrestadorR
+--       _ -> redirect HomeR
+
+
+
 getPrestadorR :: Handler Html
 getPrestadorR = do 
     buscaprof <- runDB $ selectList [] [] :: Handler [Entity Profissao]
     defaultLayout $ do
         setTitle "Service Provider Finder"
         toWidgetHead [hamlet|
-        <script src="/static/jquery-3.2.1.min.js">
+        <script src="/static/js/jquery.min.js">
         |]
         toWidget $(juliusFile "templates/cadprest.julius")
         $(whamletFile "templates/cad-prest.hamlet")
         
 postPrestadorR :: Handler TypedContent
 postPrestadorR = do 
-        prestador <- (requireJsonBody :: Handler Prestador)
-        prestadorId <- runDB $ insert prestador
-        sendStatusJSON created201 $ object ["PrestadorId".=prestadorId]
+    prestador <- (requireJsonBody :: Handler Prestador)
+    prestadorId <- runDB $ insert prestador
+    sendStatusJSON created201 $ object ["PrestadorId".=prestadorId]
     
 postPrestProfiR :: Handler TypedContent
 postPrestProfiR = do 
@@ -97,11 +159,17 @@ postBuscaR = do
     buscares <- runDB $ selectList [Filter PrestadorNomePrest (Left $ mconcat ["%",prestadorNomePrest busca,"%"]) (BackendSpecificFilter "ILIKE")] []
     sendStatusJSON ok200 (object ["resp" .= (toJSON buscares)])
         
-getPerfilR :: Handler Html
-getPerfilR = do
+getPerfilR :: PrestadorId -> Handler Html
+getPerfilR pid = do
+    prestador <- runDB $ get404 pid
+    lista' <- runDB $ selectList [PrestProfiPrestadorId ==. pid] [] :: Handler [Entity PrestProfi]
+    lista <- return $ fmap (\(Entity _ prof) -> prof) lista'
+    profids <- return $ fmap prestProfiProfissaoId lista
+    profissoes <- sequence $ fmap (\prid -> runDB $ get404 prid) profids
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/perfil.hamlet")
+
         
 getContatoR :: Handler Html
 getContatoR = do
@@ -115,11 +183,11 @@ getAlteracaogetR = do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/alteracao.hamlet")
         
---patchAlteracaoR :: PrestadorId -> Text -> Handler Value
---patchAlteracaoR pid texto = do
---       _ <- runDB $ get404 pid
---      runDB $ update pid [PrestadorNomePrest =. texto]
---        sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
+patchAlteracaoR :: PrestadorId -> Text -> Handler Value
+patchAlteracaoR pid texto = do
+    _ <- runDB $ get404 pid
+    runDB $ update pid [PrestadorNomePrest =. texto]
+    sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
 putAlteracaoR :: PrestadorId -> Handler Value
 putAlteracaoR pid = do
     _ <- runDB $ get404 pid
@@ -133,8 +201,10 @@ getRecuperacaoR = do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/recuperacao.hamlet")
         
-getPerfilPrestR :: Handler Html
-getPerfilPrestR = do
+getPerfilPrestR :: PrestadorId -> Handler Html
+getPerfilPrestR pid = do
+    prestador <- runDB $ get404 pid
+    sendStatusJSON ok200 (object ["resp" .= (toJSON prestador)])
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/perfilprest.hamlet")

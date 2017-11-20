@@ -19,7 +19,7 @@
         
                 <div class="col-md-8">
                     <label for="nomePrest">Nome
-                    <input type="text" class="form-control" name="nomePrest" id="nomePrest" value="Narciso" required>
+                    <input type="text" class="form-control" name="nomePrest" id="nomePrest" required>
                     <br>
                     <label for="cpfPrest">CPF
                     <input type="text" class="form-control" name="cpfPrest" id="cpfPrest" required>
@@ -70,4 +70,4 @@
                     <br>
                     <button type="reset" class="btn btn-secondary btn-lg pull-right">Redefinir
                     <button type="button" id="btEnviar" class="btn btn-primary btn-lg pull-right" >Enviar
-                    <script src="/static/jquery-3.2.1.min.js">
+                    <script src="/static/js/jquery.min.js">

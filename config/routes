@@ -5,15 +5,15 @@
 
 /                                   HomeR               GET 
 /paglogin                           PagLoginR           GET
-/prestador                          PrestadorR          GET POST
 /novasenha                          NovaSenhaR          GET
 /denuncia                           DenunciaR           GET POST
 /busca                              BuscaR              GET POST
-/perfil                             PerfilR             GET
+/prestador                          PrestadorR          GET POST
+/prestador/#PrestadorId/perfil      PerfilR             GET
+/prestador/#PrestadorId/perfilprest PerfilPrestR        GET
 /contato                            ContatoR            GET
 /alteracao/#PrestadorId             AlteracaoR          PUT
 /alteracao                          AlteracaogetR       GET 
 /adm                                AdmR                GET
 /recuperacao                        RecuperacaoR        GET
-/perfilprest                        PerfilPrestR        GET
 /prestprofi                         PrestProfiR         POST
