@@ -5,7 +5,10 @@
                 <div style="float:left;width:30%;">
                 <form name="denuncia">
                     <br>
-                    <p>Descreva sua denúncia:</p><p><textarea name="mensagem" rows="10" cols="50"><br>
+                    <p>Descreva sua denúncia:
+                    <p>
+                        <textarea name="mensagem" rows="10" cols="50">
+                    <br>
                     <input type="hidden" id='email' name='email'/>
                     <input type="submit" value="Enviar">
 

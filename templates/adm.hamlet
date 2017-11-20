@@ -1,12 +1,12 @@
 <section id="portfolio">
     <div class="container">
         <div class="row">
-            <legend><h2>Denuncias
+            <legend><h2>Denúncias
                 <div class="col-md-4 offset-md-4">  
                     <form name="f1" method="post">
-                        <label>Denuncia
                         <select>
-                            <option>
+                            $forall x <- prestadores
+                                <option> #{prestadorNomePrest x}
                         <label>Descrição
                         <textarea name="denuncia" class="form-control" rows="10" cols="50" readonly> 
                         <br>

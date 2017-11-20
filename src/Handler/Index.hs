@@ -215,6 +215,10 @@ getPerfilPrestR pid = do
         
 getAdmR :: Handler Html
 getAdmR = do
+    denuncias' <- runDB $ selectList [] [] :: Handler [Entity Denuncia]
+    denuncias <- return $ fmap (\(Entity _ den) -> den) denuncias' --Handler [Denuncias]
+    prestids <- return $ fmap denunciaPrestadorId denuncias -- [Handler Prestador]
+    prestadores <- sequence $ fmap (\pid -> runDB $ get404 pid) prestids -- Handler [Prestador]
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/adm.hamlet")
