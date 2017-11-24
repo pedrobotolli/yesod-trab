@@ -1,16 +1,19 @@
 <section id="portfolio">
     <div class="container">
         <div class="row">
-            <legend><h2>Denúncias
-                <div class="col-md-4 offset-md-4">  
-                    <form name="f1" method="post">
-                        <select>
-                            $forall x <- prestadores
-                                <option> #{prestadorNomePrest x}
-                        <label>Descrição
-                        <textarea name="denuncia" class="form-control" rows="10" cols="50" readonly> 
-                        <br>
-                        <button type="submit" class="btn btn-primary" value="Bloquear Usuario" id="Bloquear">Bloquear Usuario
+            <legend>
+            <h2>Denúncias
+            <div class="col-md-4 offset-md-4">  
+                <form name="f1" method="post">
+                    <select>
+                        $forall x <- prestadores
+                            <option> #{prestadorNomePrest x}
+                    <br>
+                    <label>Descrição
+                    <br>
+                    <textarea name="denuncia" class="form-control" rows="10" cols="50" readonly> 
+                    <br>
+                    <button type="submit" class="btn btn-primary" value="Bloquear Usuario" id="Bloquear">Bloquear Usuario
                         
               
               

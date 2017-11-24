@@ -6,12 +6,12 @@
 /                                   HomeR               GET 
 /paglogin                           PagLoginR           GET
 /novasenha                          NovaSenhaR          GET
-/denuncia                           DenunciaR           GET POST
+/denuncia/#PrestadorId              DenunciaR           GET POST
 /busca                              BuscaR              GET POST
 /prestador                          PrestadorR          GET POST
 /prestador/#PrestadorId/perfil      PerfilR             GET
 /prestador/#PrestadorId/perfilprest PerfilPrestR        GET
-/contato                            ContatoR            GET
+/contato                            ContatoR            GET 
 /alteracao/#PrestadorId             AlteracaoR          PUT
 /alteracao                          AlteracaogetR       GET 
 /adm                                AdmR                GET

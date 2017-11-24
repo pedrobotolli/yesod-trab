@@ -39,6 +39,9 @@ import System.Log.FastLogger                (defaultBufSize, newStdoutLoggerSet,
 import Handler.Common
 import Handler.Index
 import Handler.Entrar
+import Handler.Prestador
+import Handler.Perfil
+import Handler.Autenticacao
 
 
 -- This line actually creates our YesodDispatch instance. It is the second half

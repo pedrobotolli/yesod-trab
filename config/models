@@ -20,8 +20,8 @@ PrestProfi json
     prestadorId PrestadorId
     deriving Show
     
-Denuncia json
-    dsDenuncia  Text
+Denuncia 
+    dsDenuncia  Textarea
     dtDenuncia  Day
     prestadorId PrestadorId
     deriving Show

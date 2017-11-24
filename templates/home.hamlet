@@ -29,12 +29,13 @@
            
                 <div class="col-lg-4 ">
                     <p>   
-                        Um usuário que busca contratar determinado serviço pode buscar no sistema um profissional em sua região, filtrando por avaliações e área de atuação!</p><br>
+                        Um usuário que busca contratar determinado serviço pode buscar no sistema um profissional em sua região, filtrando por avaliações e área de atuação!<br>
                         Após a prestação do serviço, o cliente pode avaliar o profissional, dando mais visibilidade ao seu perfil.
             
 
                 <div class="col-lg-8 col-lg-offset-2">
                     <br><br><br>
-                    Caso haja algum desentendimento entre cliente e prestador, os administradores podem intervir, para assim entender a situação e tomar as devidas providências
+                    <p>
+                        Caso haja algum desentendimento entre cliente e prestador, os administradores podem intervir, para assim entender a situação e tomar as devidas providências
                 
          
