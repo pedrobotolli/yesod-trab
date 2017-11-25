@@ -61,7 +61,7 @@ getPerfilPrestR pid = do
 formDen :: PrestadorId -> Form Denuncia 
 formDen prestadorId = renderBootstrap $ Denuncia 
     <$> areq textareaField "Descreva sua denúncia: " Nothing
-    <*> areq dayField "Data" Nothing
+    <*> fmap utctDay (lift $ liftIO getCurrentTime)
     <*> pure prestadorId
 
 getDenunciaR :: PrestadorId -> Handler Html

@@ -16,4 +16,3 @@
 /alteracao                          AlteracaogetR       GET 
 /adm                                AdmR                GET
 /recuperacao                        RecuperacaoR        GET
-/prestprofi                         PrestProfiR         POST

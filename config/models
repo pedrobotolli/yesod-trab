@@ -22,7 +22,7 @@ PrestProfi json
     
 Denuncia 
     dsDenuncia  Textarea
-    dtDenuncia  Day
+    dtDenuncia  Day default=CURRENT_DATE
     prestadorId PrestadorId
     deriving Show
 
