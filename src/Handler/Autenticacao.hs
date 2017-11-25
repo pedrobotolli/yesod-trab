@@ -35,14 +35,14 @@ getRecuperacaoR = do
         $(whamletFile "templates/recuperacao.hamlet")
         
 
-{-
+
 patchNovaSenhaR :: PrestadorId -> Text -> Handler Value
 patchNovaSenhaR pid senha = do
     _ <- runDB $ get404 pid
-    runDB $ update pid [PrestadorSenha =. nome]
+    runDB $ update pid [PrestadorSenhaPrest =. senha]
     sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
 
-
+{-
 getLogaR :: Handler Html
 getLogaR email senha = do
     logando <- runDB $ get404 email senha
