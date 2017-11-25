@@ -33,3 +33,20 @@ getRecuperacaoR = do
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/recuperacao.hamlet")
+        
+
+{-
+patchNovaSenhaR :: PrestadorId -> Text -> Handler Value
+patchNovaSenhaR pid senha = do
+    _ <- runDB $ get404 pid
+    runDB $ update pid [PrestadorSenha =. nome]
+    sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
+
+
+getLogaR :: Handler Html
+getLogaR email senha = do
+    logando <- runDB $ get404 email senha
+    prestador <- runDB $ selectList [PrestadorEmail ==. email] []
+    pid <- return $ fmap prestadorPrestadorId prestador
+    redirect PerfilPrestR pid
+-}

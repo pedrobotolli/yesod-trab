@@ -1,0 +1,24 @@
+<section id="admin">
+        <div class="container">
+			<div class="Email">
+				<h1>Indicação</h1>
+       		  <div>
+                <div style="float:left;width:30%;">
+					<form name ="Indicar" method="post">
+					    <br>
+					    <p>
+					        Descreva o porque da Indicação:
+					    <p>
+					        <textarea name="mensagem" rows="10" cols="50"></textarea>
+					    <br>
+                        <label>Quem recebera Indicação
+                        <input type="text" id='emailIn' name='emailIn' value=''>
+                 	    <input type="submit" value="Enviar">
+
+                 </form>
+                  </div>
+       		  </div>
+            </div>
+        </div>
+
+    </section>

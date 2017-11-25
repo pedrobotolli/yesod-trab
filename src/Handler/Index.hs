@@ -17,15 +17,15 @@ getHomeR :: Handler Html
 getHomeR = do
     defaultLayout $ do
         setTitle "Service Provider Finder"
-        toWidget $(juliusFile "templates/home.julius")
+        toWidgetHead $(juliusFile "templates/home.julius")
         $(whamletFile "templates/home.hamlet")
         toWidget $ 
             [lucius|
-                map{
+                #map{
                     height: 550px;
                     width: 100%;
                     }
-                busca{
+                #busca{
                     position: absolute;
                     top: 550px;
                 }
@@ -107,53 +107,7 @@ getAdmR = do
     denuncias <- return $ fmap (\(Entity _ den) -> den) denuncias' --Handler [Denuncias]
     prestids <- return $ fmap denunciaPrestadorId denuncias -- [Handler PrestadorId]
     prestadores <- sequence $ fmap (\pid -> runDB $ get404 pid) prestids -- Handler [Prestador]
+    prestadordenuncia <- return $ zip denuncias prestadores
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/adm.hamlet")
-        
-{-
-getNovaSenhaR :: Handler Html
-getNovaSenhaR = do
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/novasenha.hamlet")
-
-getRecuperacaoR :: Handler Html
-getRecuperacaoR = do 
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/recuperacao.hamlet")
-
-getAlteracaogetR :: Handler Html
-getAlteracaogetR = do
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/alteracao.hamlet")
-
-putAlteracaoR :: PrestadorId -> Handler Value
-putAlteracapR pid = do
-    _ <- runDB $ get404 pid
-    novoPrestador <- requireJsonBody :: Handler Prestador
-    runDB $ replace pid novoPrestador
-    sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
-    
-getPerfilR :: PrestadorId -> Handler Html
-getPerfilR = do
-    prestador <- runDB $ get404 pid
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/perfil.hamlet")
-
-getPerfilPrestR :: PrestadorId -> Handler Html
-getPerfilR = do
-    prestador <- runDB $ get404 pid
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/perfilprest.hamlet")
-
-getPagLoginR :: Handler Html
-getPagLoginR = do
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/paglogin.hamlet")
--}

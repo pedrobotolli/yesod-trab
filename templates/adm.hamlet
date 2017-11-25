@@ -1,20 +1,28 @@
 <section id="portfolio">
     <div class="container">
-        <div class="row">
-            <legend>
+        <div class="row text-center">
             <h2>Denúncias
-            <div class="col-md-4 offset-md-4">  
-                <form name="f1" method="post">
-                    <select>
-                        $forall x <- prestadores
-                            <option> #{prestadorNomePrest x}
-                    <br>
-                    <label>Descrição
-                    <br>
-                    <textarea name="denuncia" class="form-control" rows="10" cols="50" readonly> 
-                    <br>
-                    <button type="submit" class="btn btn-primary" value="Bloquear Usuario" id="Bloquear">Bloquear Usuario
-                        
+            <legend>
+        
+        <div class="col-md-8 col-md-offset-2 table-responsive">  
+            <form name="f1" method="post">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td> 
+                                Nome do Prestador
+                            <td>
+                                Descrição da Denúncias
+                            <td>
+                                Data da Denúncia
+                    <tbody>
+                        $forall (denuncia,prestador) <- prestadordenuncia
+                            <tr> 
+                                <td>#{prestadorNomePrest prestador}
+                                <td>#{show $ denunciaDtDenuncia denuncia}
+                                <td>#{denunciaDsDenuncia denuncia}
+                                <td><button class="btn btn-danger"> Banir
+
               
               
 

@@ -12,7 +12,7 @@ import Text.Julius
 import Text.Hamlet
 import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
-import Data.Time 
+import Data.Time
 
 getPerfilR :: PrestadorId -> Handler Html
 getPerfilR pid = do
@@ -55,7 +55,6 @@ getPerfilPrestR pid = do
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/perfilprest.hamlet")
-        
 
 
 formDen :: PrestadorId -> Form Denuncia 

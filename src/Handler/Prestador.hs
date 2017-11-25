@@ -14,25 +14,25 @@ import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
 import Prelude
 import Yesod.Form
-
+import Yesod.Form.Bootstrap3
 
 formPrestador :: Html -> MForm Handler (FormResult (Prestador, PrestProfi), Widget)
 formPrestador = renderBootstrap $ (,) -- (\a b c d e f g h i j-> (Prestador a b c d e g h f , PrestProfi j))
     <$>
     (Prestador
-    <$> areq textField "Cpf: " Nothing -- a
-    <*> areq passwordField "Senha: " Nothing -- b
-    <*> areq textField "Nome: " Nothing -- c
-    <*> areq emailField "Email: " Nothing -- d
-    <*> areq textField "Telefone:" Nothing -- e 
-    <*> areq textField "Curriculo:" Nothing -- f 
-    <*> areq textField "Cep: " Nothing -- g
-    <*> areq textField "Numero: " Nothing -- h
+    <$> areq textField (bfs ("Cpf: " ::Text)) Nothing -- a
+    <*> pure "senhaDoPerstador" -- b
+    <*> areq textField (bfs ("Nome: " ::Text)) Nothing -- c
+    <*> areq emailField (bfs ("Email: " ::Text)) Nothing -- d
+    <*> areq textField (bfs ("Telefone:" ::Text)) Nothing -- e 
+    <*> areq textField (bfs ("Curriculo:" ::Text)) Nothing -- f 
+    <*> areq textField (bfs ("Cep: " ::Text)) Nothing -- g
+    <*> areq textField (bfs ("Numero: " ::Text)) Nothing -- h
     )
     <*>
     (PrestProfi
-    <$> areq (selectField $ optionsPersistKey [] [Asc ProfissaoNomeProfissao] profissaoNomeProfissao) "Profissão: " Nothing -- j
-    <*> areq hiddenField "" (Just $ toSqlKey 0)
+    <$> areq (selectField $ optionsPersistKey [] [Asc ProfissaoNomeProfissao] profissaoNomeProfissao) (bfs ("Profissão: " ::Text)) Nothing -- j
+    <*> pure (toSqlKey 0)
     )
       
 {-    
@@ -55,9 +55,11 @@ getPrestadorR = do
     defaultLayout $ do
         [whamlet|
             <br><br>
-           <form action=@{PrestadorR} method=post enctype=#{enctype}>
-                ^{widget}
-                <input type="submit" value="Enviar">
+            <div class="col-sm-6 col-sm-offset-3">
+                <form action=@{PrestadorR} method=post enctype=#{enctype}>
+                    ^{widget}
+                    <br>
+                    <input type="submit" class="btn btn-primary pull-right" value="Enviar">
         |]
         
 postPrestadorR :: Handler Html

@@ -11,6 +11,7 @@
 /prestador                          PrestadorR          GET POST
 /prestador/#PrestadorId/perfil      PerfilR             GET
 /prestador/#PrestadorId/perfilprest PerfilPrestR        GET
+
 /contato                            ContatoR            GET 
 /alteracao/#PrestadorId             AlteracaoR          PUT
 /alteracao                          AlteracaogetR       GET 
