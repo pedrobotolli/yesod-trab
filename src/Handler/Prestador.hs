@@ -16,37 +16,41 @@ import Prelude
 import Yesod.Form
 import Yesod.Form.Bootstrap3
 
-formPrestador :: Html -> MForm Handler (FormResult (Prestador, PrestProfi), Widget)
-formPrestador = renderBootstrap $ (,) -- (\a b c d e f g h i j-> (Prestador a b c d e g h f , PrestProfi j))
+
+formPrestador :: Html -> MForm Handler (FormResult (Prestador, PrestProfi,FileInfo), Widget)
+formPrestador = renderBootstrap $ (,,) -- (\a b c d e f g h i j-> (Prestador a b c d e g h f , PrestProfi j))
     <$>
     (Prestador
     <$> areq textField (bfs ("Cpf: " ::Text)) Nothing -- a
-    <*> pure "senhaDoPerstador" -- b
+    <*> pure "senhaDoPrestador" -- b
     <*> areq textField (bfs ("Nome: " ::Text)) Nothing -- c
     <*> areq emailField (bfs ("Email: " ::Text)) Nothing -- d
     <*> areq textField (bfs ("Telefone:" ::Text)) Nothing -- e 
     <*> areq textField (bfs ("Curriculo:" ::Text)) Nothing -- f 
     <*> areq textField (bfs ("Cep: " ::Text)) Nothing -- g
     <*> areq textField (bfs ("Numero: " ::Text)) Nothing -- h
+    <*> pure False
+    <*> areq hiddenField "Foto" Nothing
     )
     <*>
     (PrestProfi
     <$> areq (selectField $ optionsPersistKey [] [Asc ProfissaoNomeProfissao] profissaoNomeProfissao) (bfs ("Profissão: " ::Text)) Nothing -- j
     <*> pure (toSqlKey 0)
     )
-      
-{-    
-formProfissao :: Html -> MForm Handler (FormResult PrestProfi, Widget)
-formProfissao = renderBootstrap3 $ PrestProfi
-    <$> areq (selectFieldList profissoes) "Profissão: " Nothing
-  where
-    profissoes :: GHandler App App (OptionList ProfissaoId)
-    profissoes = do
-        entities <- runDB $ selectList [] [Asc ProfissaoNomeProfissao]
-        optionsPairs $ Prelude.map (\prof -> (profissaoNomeProfissao $ entityVal prof, entityKey prof)) entities
-
--}
+    <*>
+    (
+      areq fileField 
+                           FieldSettings{fsId=Just "hident1",
+                                         fsLabel="Arquivo: ",
+                                         fsTooltip= Nothing,
+                                         fsName= Nothing,
+                                         fsAttrs=[("accept","image/*")]} 
+                           Nothing
         
+    )
+    
+      
+
 
     
 getPrestadorR :: Handler Html
@@ -54,25 +58,43 @@ getPrestadorR = do
     (widget, enctype) <- generateFormPost formPrestador
     defaultLayout $ do
         [whamlet|
-            <br><br>
-            <div class="col-sm-6 col-sm-offset-3">
-                <form action=@{PrestadorR} method=post enctype=#{enctype}>
-                    ^{widget}
-                    <br>
-                    <input type="submit" class="btn btn-primary pull-right" value="Enviar">
+            <br>
+            <form action=@{PrestadorR} method=post enctype=#{enctype}>
+                ^{widget}
+                <br>
+                                
+            <input type="submit" value="Enviar">
         |]
         
 postPrestadorR :: Handler Html
 postPrestadorR = do
     ((result,_),_) <- runFormPost formPrestador
     case result of
-        FormSuccess (prestador, prestpr) -> do
+        FormSuccess (prestador, prestpr,arq) -> do
+            liftIO $ fileMove arq ("static/" Import.++ (unpack $ fileName arq))
             prestadorId <- runDB $ insert $ prestador
             runDB $ insert $ PrestProfi (prestProfiProfissaoId prestpr) prestadorId
             redirect PrestadorR
         _ -> redirect HomeR
 
+{-formProfissao :: Html -> MForm Handler (FormResult PrestProfi, Widget)
+formProfissao = renderBootstrap3 $ PrestProfi
+    <$> areq (selectFieldList profissoes) "Profissão: " Nothing
+  where
+    profissoes :: GHandler App App (OptionList ProfissaoId)
+    profissoes = do
+        entities <- runDB $ selectList [] [Asc ProfissaoNomeProfissao]
+        optionsPairs $ Prelude.map (\prof -> (profissaoNomeProfissao $ entityVal prof, entityKey prof)) entities
+        
+-}      
+{-        
+formInd :: PrestadorId -> Form Indicacao
+formInd pid = renderBootstrap $ Indicacao
+ -}  
+    
 
+
+        
 {-
 postPrestadorR :: Handler Html
 postPrestadorR = do
@@ -106,4 +128,11 @@ postPrestProfiR = do
         prestprofi <- (requireJsonBody :: Handler PrestProfi)
         prestprofiId <- runDB $ insert prestprofi
         sendStatusJSON created201 $ object ["PrestProfiId".=prestprofiId]
+        
+        
+postApagarProdR :: ProdutoId -> Handler Html
+postApagarProdR pid = do 
+    _ <- runDB $ get404 pid
+    runDB $ delete pid 
+    redirect ListaProdutoR
 -}

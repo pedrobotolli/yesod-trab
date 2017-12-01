@@ -9,6 +9,9 @@ Prestador json
     curriculoPrest  Text
     cepPrest    Text
     numEndPrest Text
+    contaAtivadaPrest Bool default=FALSE
+    fotoPrest   Text 
+    UniqueEmail emailPrest
     deriving Show
 
 Profissao json
@@ -19,7 +22,11 @@ PrestProfi json
     profissaoId ProfissaoId
     prestadorId PrestadorId
     deriving Show
-    
+
+PrestImg json
+    prestadorId PrestadorId
+    imagemPrest Text   
+
 Denuncia 
     dsDenuncia  Textarea
     dtDenuncia  Day default=CURRENT_DATE
@@ -30,11 +37,11 @@ Admin json
     nomeAdmin Text
     emailAdmin  Text
     senhaAdmin  Text
+    UniqueEmailAdm emailAdmin
     deriving Show
 
 AdminDenuncia  json
     denunciaId  DenunciaId
     adminID AdminId
     deriving Show
-    
     

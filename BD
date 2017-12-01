@@ -1,3 +1,25 @@
-psql -h ec2-184-72-223-199.compute-1.amazonaws.com -U nxnrdrqzkgghrj -d ddimt4gojo3efg
+psql -h ec2-184-72-223-199.compute-1.amazonaws.com -U nxnrdrqzkgghrj -d ddimt4gojo3efg 
 -h host, -U usuario, -d database
 password eb8542c1e913b19d447777a706ac6890967a0af61bdfc33b2fc5108ce20226f0
+comentar linha 10 nofoundation
+linha 26
+    authRoute _= Just LoginR
+    isAuthorized LoginR _= return Authorized
+    isAuthorized HomeR _ = return Authorized
+    isAuthorized Usuario _ = ehAdmin
+    isAuthorized _ _ = ehUsuario
+
+ehAdmin :: Handler AuthResult
+ehAdmin = do
+    sess <- lookupsession "_NOME"
+    case sess of
+        Nothing -> return AuthenticationRequired
+        Just "admin" -> return Authorized
+        Just _ -> return $ Unauthorized "VC NAO EH O PAH!"
+        
+ehUsuario :: Handler AuthResult
+ehUsuario = do
+    sess <- lookupsession "_NOME"
+    case sess of
+        Nothing -> return AuthenticationRequired
+        Just _ -> return Authorized

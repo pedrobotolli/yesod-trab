@@ -12,6 +12,12 @@ import Text.Julius
 import Text.Hamlet
 import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
+import Yesod.Form.Bootstrap3
+
+formLogin :: Form (Text,Text) 
+formLogin = renderDivs $ (,) 
+    <$> areq emailField (bfs ("Email: " :: Text)) Nothing
+    <*> areq passwordField (bfs ("Senha: " :: Text)) Nothing
 
 getNovaSenhaR :: Handler Html
 getNovaSenhaR = do
@@ -19,15 +25,6 @@ getNovaSenhaR = do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/novasenha.hamlet")
         
-        
-getPagLoginR :: Handler Html
-getPagLoginR = do
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/paglogin.hamlet")
-        
-
-    
 getRecuperacaoR :: Handler Html
 getRecuperacaoR = do
     defaultLayout $ do
@@ -42,11 +39,36 @@ patchNovaSenhaR pid senha = do
     runDB $ update pid [PrestadorSenhaPrest =. senha]
     sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
 
-{-
-getLogaR :: Handler Html
-getLogaR email senha = do
-    logando <- runDB $ get404 email senha
-    prestador <- runDB $ selectList [PrestadorEmail ==. email] []
-    pid <- return $ fmap prestadorPrestadorId prestador
-    redirect PerfilPrestR pid
--}
+autentica :: Text -> Text -> HandlerT App IO (Maybe (Entity Prestador))
+autentica email senha = runDB $ selectFirst [PrestadorEmailPrest ==. email
+                                            ,PrestadorSenhaPrest ==. senha] []
+
+postLoginR :: Handler Html
+postLoginR = do 
+    ((resultado,_),_) <- runFormPost formLogin
+    case resultado of
+        FormSuccess (email,senha) -> do 
+            talvezPrestador <- autentica email senha
+            case talvezPrestador of 
+                Nothing -> do 
+                    setMessage [shamlet|
+                        <div> 
+                            Prestador nao encontrado/Senha invalida!
+                    |]
+                    redirect LoginR
+                Just (Entity chave pre) -> do 
+                    setSession "_NOME" (prestadorNomePrest pre)
+                    redirect HomeR
+                
+        _ -> redirect HomeR
+    
+
+getLoginR :: Handler Html
+getLoginR = do 
+    (widget,enctype) <- generateFormPost formLogin
+    mensa <- getMessage
+    defaultLayout $ do 
+        $(whamletFile "templates/paglogin.hamlet")
+        
+
+        

@@ -7,5 +7,5 @@
                     ^{widget}
                     <br>
                     <br>
-                    <input type="submit" value="Enviar">
+                    <input type="submit" class="btn btn-primary btn-lg"  value="Enviar">
 

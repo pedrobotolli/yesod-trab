@@ -12,6 +12,7 @@
                         <form method="post" name="formulario">
                             <div class="container">
                                 <img src="" width="150" height="150">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
                                 <div class="col-md-12">
                                     <label>Nome
                                     <input type="text" name="nome" class="form-control" value=#{prestadorNomePrest prestador} readonly>

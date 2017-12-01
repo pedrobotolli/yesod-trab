@@ -42,7 +42,7 @@ getEntrarR = defaultLayout $ do
                                 <a href="cadastro">
                                     Cadastre-se
                             <li>
-                                <a href="contato ">
+                                <a href="contato">
                                     Contato
                                     
             <header>

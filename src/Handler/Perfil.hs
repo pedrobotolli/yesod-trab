@@ -13,6 +13,8 @@ import Text.Hamlet
 import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
 import Data.Time
+import Yesod.Form
+import Yesod.Form.Bootstrap3
 
 getPerfilR :: PrestadorId -> Handler Html
 getPerfilR pid = do
@@ -59,7 +61,7 @@ getPerfilPrestR pid = do
 
 formDen :: PrestadorId -> Form Denuncia 
 formDen prestadorId = renderBootstrap $ Denuncia 
-    <$> areq textareaField "Descreva sua denúncia: " Nothing
+    <$> areq textareaField (bfs ("Descreva sua denúncia: " ::Text)) Nothing
     <*> fmap utctDay (lift $ liftIO getCurrentTime)
     <*> pure prestadorId
 
@@ -71,11 +73,9 @@ getDenunciaR pid = do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/denuncia.hamlet")
         
-postDenunciaR :: PrestadorId -> Handler Html
-postDenunciaR pid = do
-    ((resultado,_),_) <- runFormPost $ formDen pid
-    case resultado of 
-        FormSuccess denuncia -> do 
-            caddenuncia <- runDB $ insert denuncia
-            redirect (HomeR)
-        _ -> redirect (ContatoR)
+-- UPDATE Cliente SET cliente.nome = nome WHERE cliente.id == cid
+patchDenunciaR :: PrestadorId -> Handler Value
+patchDenunciaR pid = do 
+    _ <- runDB $ get404 pid
+    runDB $ update pid [PrestadorContaAtivadaPrest =. False]
+    sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])

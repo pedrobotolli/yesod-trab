@@ -12,16 +12,16 @@
                             <td> 
                                 Nome do Prestador
                             <td>
-                                Descrição da Denúncias
-                            <td>
                                 Data da Denúncia
+                            <td>
+                                Descrição da Denúncias
                     <tbody>
                         $forall (denuncia,prestador) <- prestadordenuncia
                             <tr> 
                                 <td>#{prestadorNomePrest prestador}
                                 <td>#{show $ denunciaDtDenuncia denuncia}
                                 <td>#{denunciaDsDenuncia denuncia}
-                                <td><button class="btn btn-danger"> Banir
+                                <td><form action=@{DenunciaR $ denunciaPrestadorId denuncia} method=patch> <input type="submit" class="btn btn-danger" value="Banir"> 
 
               
               

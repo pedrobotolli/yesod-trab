@@ -7,7 +7,6 @@
 
 module Foundation where
 
-import Text.Hamlet
 import Import.NoFoundation
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Yesod.Core.Types     (Logger)
@@ -19,16 +18,12 @@ data App = App
     , appHttpManager :: Manager
     , appLogger      :: Logger
     }
-mkYesodData "App" $(parseRoutesFile "config/routes")
 
-type Form a = Html -> MForm Handler (FormResult a, Widget)
+mkYesodData "App" $(parseRoutesFile "config/routes")
 
 instance Yesod App where
     makeLogger = return . appLogger
-    defaultLayout widget =  do
-        pc <- widgetToPageContent $ do
-            widget
-        withUrlRenderer $(hamletFile "templates/layout.hamlet")
+type Form a = Html -> MForm Handler (FormResult a, Widget)
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend
