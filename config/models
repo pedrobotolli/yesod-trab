@@ -1,5 +1,3 @@
-
-
 Prestador json
     cpfPrest    Text
     senhaPrest  Text
@@ -40,8 +38,5 @@ Admin json
     UniqueEmailAdm emailAdmin
     deriving Show
 
-AdminDenuncia  json
-    denunciaId  DenunciaId
-    adminID AdminId
-    deriving Show
+
     

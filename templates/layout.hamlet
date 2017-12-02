@@ -1,6 +1,7 @@
 $doctype 5
 <html>
     <head>
+        <script src=@{StaticR js_jquery_min_js}>
         <title>#{pageTitle pc}
         <meta charset=utf-8>
         <link rel="icon" href=@{FaviconR} type="image/x-icon">
@@ -28,7 +29,7 @@ $doctype 5
                             <a href="@{HomeR}">
                                 Inicio
                         <li>
-                            <a href="@{PagLoginR}">
+                            <a href="@{LoginR}">
                                     Minha Conta
                         <li>
                             <a href="@{PrestadorR}">
@@ -46,8 +47,9 @@ $doctype 5
                     <div class="row">
                         <div class="col-12">
                             Copyright SPF Corporation
-        <!-- jQuery -->
-        <script src=@{StaticR js_jquery_min_js}>
+        <!-- jQuery  -->
+        
+        
     
         <!-- Bootstrap Core JavaScript -->
         <script src=@{StaticR js_bootstrap_min_js}>

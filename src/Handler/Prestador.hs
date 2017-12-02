@@ -30,7 +30,7 @@ formPrestador = renderBootstrap $ (,,) -- (\a b c d e f g h i j-> (Prestador a b
     <*> areq textField (bfs ("Cep: " ::Text)) Nothing -- g
     <*> areq textField (bfs ("Numero: " ::Text)) Nothing -- h
     <*> pure False
-    <*> areq hiddenField "Foto" Nothing
+    <*> pure "nomeArq"
     )
     <*>
     (PrestProfi
@@ -58,22 +58,36 @@ getPrestadorR = do
     (widget, enctype) <- generateFormPost formPrestador
     defaultLayout $ do
         [whamlet|
-            <br>
-            <form action=@{PrestadorR} method=post enctype=#{enctype}>
-                ^{widget}
+            <section id="portfolio">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <br>
+                            <legend><h2>Cadastro de Prestador
+                
                 <br>
+                <div class="container">
+                    <form action=@{PrestadorR} method=post enctype=#{enctype}>
+                        ^{widget}
+                    <br>
                                 
-            <input type="submit" value="Enviar">
+                    <input type="submit" class="btn btn-primary" value="Enviar">
         |]
         
 postPrestadorR :: Handler Html
 postPrestadorR = do
     ((result,_),_) <- runFormPost formPrestador
     case result of
-        FormSuccess (prestador, prestpr,arq) -> do
+        FormSuccess (prestador, prestpr, arq) -> do
             liftIO $ fileMove arq ("static/" Import.++ (unpack $ fileName arq))
-            prestadorId <- runDB $ insert $ prestador
+            prestadorId <- runDB $ insert prestador
+            setMessage [shamlet|
+                        <div> 
+                            Usuario nao encontrado/Senha invalida!
+                    |]
             runDB $ insert $ PrestProfi (prestProfiProfissaoId prestpr) prestadorId
+--          runDB $ update prestadorId [PrestadorFotoPrest =.fileName arq]
+            
             redirect PrestadorR
         _ -> redirect HomeR
 
@@ -85,7 +99,7 @@ formProfissao = renderBootstrap3 $ PrestProfi
     profissoes = do
         entities <- runDB $ selectList [] [Asc ProfissaoNomeProfissao]
         optionsPairs $ Prelude.map (\prof -> (profissaoNomeProfissao $ entityVal prof, entityKey prof)) entities
-        
+    
 -}      
 {-        
 formInd :: PrestadorId -> Form Indicacao
@@ -116,7 +130,7 @@ getPrestadorR = do
         |]
         toWidget $(juliusFile "templates/cadprest.julius")
         $(whamletFile "templates/cad-prest.hamlet")
-        
+    
 postPrestadorR :: Handler TypedContent
 postPrestadorR = do 
     prestador <- (requireJsonBody :: Handler Prestador)
@@ -128,8 +142,7 @@ postPrestProfiR = do
         prestprofi <- (requireJsonBody :: Handler PrestProfi)
         prestprofiId <- runDB $ insert prestprofi
         sendStatusJSON created201 $ object ["PrestProfiId".=prestprofiId]
-        
-        
+    
 postApagarProdR :: ProdutoId -> Handler Html
 postApagarProdR pid = do 
     _ <- runDB $ get404 pid

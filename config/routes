@@ -5,7 +5,7 @@
 
 /                                                   HomeR               GET 
 /novasenha                                          NovaSenhaR          GET
-/denuncia/#PrestadorId                              DenunciaR           GET PATCH
+/denuncia/#PrestadorId                              DenunciaR           GET POST PATCH
 /busca                                              BuscaR              GET POST
 /prestador                                          PrestadorR          GET POST
 /prestador/#PrestadorId/perfil                      PerfilR             GET
@@ -16,3 +16,4 @@
 /alteracao                                          AlteracaogetR       GET 
 /adm                                                AdmR                GET
 /recuperacao                                        RecuperacaoR        GET
+/listar                                             ListarR             GET

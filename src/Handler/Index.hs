@@ -15,6 +15,7 @@ import Database.Persist.Postgresql
 
 getHomeR :: Handler Html
 getHomeR = do
+    prestadores <- runDB $ selectList [] [] :: Handler [Entity Prestador]
     defaultLayout $ do
         setTitle "Service Provider Finder"
         toWidgetHead $(juliusFile "templates/home.julius")
@@ -101,13 +102,4 @@ getContatoR = do
 
         
         
-getAdmR :: Handler Html
-getAdmR = do
-    denuncias' <- runDB $ selectList [] [] :: Handler [Entity Denuncia]
-    denuncias <- return $ fmap (\(Entity _ den) -> den) denuncias' --Handler [Denuncias]
-    prestids <- return $ fmap denunciaPrestadorId denuncias -- [Handler PrestadorId]
-    prestadores <- sequence $ fmap (\pid -> runDB $ get404 pid) prestids -- Handler [Prestador]
-    prestadordenuncia <- return $ zip denuncias prestadores
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/adm.hamlet")
+

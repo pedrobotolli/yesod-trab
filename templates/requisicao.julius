@@ -1,0 +1,8 @@
+function deletarPrestador(e, url){
+	$.ajax(url, {method:"PATCH"}).done(function(){
+		console.log(e);
+		$(e).closest('tr').remove();
+	}).fail(function(){
+		alert("deu ruim");
+	});
+}

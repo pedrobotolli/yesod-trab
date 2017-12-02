@@ -59,23 +59,4 @@ getPerfilPrestR pid = do
         $(whamletFile "templates/perfilprest.hamlet")
 
 
-formDen :: PrestadorId -> Form Denuncia 
-formDen prestadorId = renderBootstrap $ Denuncia 
-    <$> areq textareaField (bfs ("Descreva sua denúncia: " ::Text)) Nothing
-    <*> fmap utctDay (lift $ liftIO getCurrentTime)
-    <*> pure prestadorId
 
-getDenunciaR :: PrestadorId -> Handler Html
-getDenunciaR pid = do
-    prestador <- runDB $ get404 pid
-    (widget,enctype) <- generateFormPost $ formDen pid
-    defaultLayout $ do
-        setTitle "Service Provider Finder"
-        $(whamletFile "templates/denuncia.hamlet")
-        
--- UPDATE Cliente SET cliente.nome = nome WHERE cliente.id == cid
-patchDenunciaR :: PrestadorId -> Handler Value
-patchDenunciaR pid = do 
-    _ <- runDB $ get404 pid
-    runDB $ update pid [PrestadorContaAtivadaPrest =. False]
-    sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
