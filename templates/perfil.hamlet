@@ -11,7 +11,7 @@
                     <p>
                         <form>
                             <div class="container">
-                                <img src="" width="150" height="150">
+                                <img src=#{prestadorFotoPrest prestador} width="150" height="150">
                                 <div class="col-md-12">
                                     <label>Nome
                                     <input type="text" name="nome" class="form-control" value=#{prestadorNomePrest prestador} readonly>

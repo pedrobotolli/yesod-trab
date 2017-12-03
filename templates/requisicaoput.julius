@@ -1,0 +1,7 @@
+function atualizaPrestador(url){
+	$.ajax(url, {method:"PUT"}).done(function(){
+		console.log("deu ótimo");
+	}).fail(function(){
+		alert("deu ruim");
+	});
+}

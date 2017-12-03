@@ -22,14 +22,14 @@ formPrestador = renderBootstrap $ (,,) -- (\a b c d e f g h i j-> (Prestador a b
     <$>
     (Prestador
     <$> areq textField (bfs ("Cpf: " ::Text)) Nothing -- a
-    <*> pure "senhaDoPrestador" -- b
+    <*> areq passwordField (bfs ("Senha: " :: Text)) Nothing -- b
     <*> areq textField (bfs ("Nome: " ::Text)) Nothing -- c
     <*> areq emailField (bfs ("Email: " ::Text)) Nothing -- d
     <*> areq textField (bfs ("Telefone:" ::Text)) Nothing -- e 
     <*> areq textField (bfs ("Curriculo:" ::Text)) Nothing -- f 
     <*> areq textField (bfs ("Cep: " ::Text)) Nothing -- g
     <*> areq textField (bfs ("Numero: " ::Text)) Nothing -- h
-    <*> pure False
+    <*> pure True
     <*> pure "nomeArq"
     )
     <*>
@@ -86,7 +86,7 @@ postPrestadorR = do
                             Usuario nao encontrado/Senha invalida!
                     |]
             runDB $ insert $ PrestProfi (prestProfiProfissaoId prestpr) prestadorId
---          runDB $ update prestadorId [PrestadorFotoPrest =.fileName arq]
+--          runDB $ update prestadorId [PrestadorFotoPrest =."/" Import.++ fileName arq]
             
             redirect PrestadorR
         _ -> redirect HomeR
