@@ -32,7 +32,7 @@ instance Yesod App where
     isAuthorized HomeR _ = return Authorized
     isAuthorized AdmR _ = ehAdmin
     isAuthorized _ _ = ehUsuario
-    
+
 
 ehAdmin :: Handler AuthResult
 ehAdmin = do 

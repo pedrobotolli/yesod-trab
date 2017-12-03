@@ -67,14 +67,10 @@ getAlteracaogetR = do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/alteracao.hamlet")
         
-patchAlteracaoR :: PrestadorId -> Text -> Handler Value
-patchAlteracaoR pid texto = do
-    _ <- runDB $ get404 pid
-    runDB $ update pid [PrestadorNomePrest =. texto]
-    sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
+
     
-putAlteracaoR :: PrestadorId -> Handler Html
-putAlteracaoR pid = do
+postAlteracaoR :: PrestadorId -> Handler Html
+postAlteracaoR pid = do
     pr <- runDB $ get404 pid;
     ((result,_),_) <- runFormPost $ formPerfilPrest pr
     case result of
@@ -84,8 +80,8 @@ putAlteracaoR pid = do
             runDB $ replace pid prestador
             runDB $ deleteWhere [PrestProfiPrestadorId ==. pid]
             runDB $ insert $ PrestProfi (prestProfiProfissaoId prestpr) pid
-            runDB $ update pid [PrestadorFotoPrest =."/" Import.++ fileName arq]
-            redirect PrestadorR
+            runDB $ update pid [PrestadorFotoPrest =."/static/" Import.++ fileName arq]
+            redirect $ PerfilR $ pid
         _ -> redirect HomeR
     
     

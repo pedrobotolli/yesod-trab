@@ -12,7 +12,7 @@
 /prestador/perfilprest/#PrestadorId                 PerfilPrestR        GET
 /login                                              LoginR              GET POST
 /contato                                            ContatoR            GET 
-/alteracao/#PrestadorId                             AlteracaoR          PUT
+/alteracao/#PrestadorId                             AlteracaoR          POST
 /alteracao                                          AlteracaogetR       GET 
 /adm                                                AdmR                GET
 /recuperacao                                        RecuperacaoR        GET

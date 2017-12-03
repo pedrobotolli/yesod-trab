@@ -1,6 +1,6 @@
     function initMap() {
                 var prestadores;
-                var enderecos;
+                var enderecos= Array();
                 var geocoder = new google.maps.Geocoder();
                 //var endereco ="Guarujá, São Paulo, Brasil";
                 var posicoes;
@@ -39,8 +39,7 @@
                             $.ajax({ 
                                 url: 'https://viacep.com.br/ws/'+ obj[i].cepPrest +'/json/',
                                 type: 'GET',
-                                success: function (dados) {
-                                    var resultado = dados;
+                                success: function (resultado) {
                                     if(Object.keys(resultado)[0]=="cep"){
                                         var end= resultado.logradouro + ", " + resultado.bairro + ", " + obj[i].numEndPrest + ", " + resultado.localidade; 
                                         enderecos.push(end);
@@ -72,7 +71,7 @@
                             posicoes.push(posicao);
                           }
                         });
-                        if(inicializa){
+                        if(inicializa ==true){
                             criaMapa();
                         }
                     }

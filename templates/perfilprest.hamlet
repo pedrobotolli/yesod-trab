@@ -9,7 +9,7 @@
                     <div id="map">
                 <div style="float:left;width:70%;">
                     <p>
-                        <form action=@{AlteracaoR pid} method=put enctype=#{enctype}>
+                        <form action=@{AlteracaoR pid} method=post enctype=#{enctype}>
                             ^{widget}
-                            <buttom type="buttom" onclick="atualizaPrestador('@{AlteracaoR pid}')"  class="btn btn-primary btn-lg pull-right" >Alterar 
+                            <input type="submit" class="btn btn-primary btn-lg pull-right" value="Alterar">
                         <br>
