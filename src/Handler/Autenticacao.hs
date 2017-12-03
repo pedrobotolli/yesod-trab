@@ -15,7 +15,7 @@ import Database.Persist.Postgresql
 import Yesod.Form.Bootstrap3
 
 formLogin :: Form (Text,Text) 
-formLogin = renderDivs $ (,) 
+formLogin = renderBootstrap $ (,) 
     <$> areq emailField (bfs ("Email: " :: Text)) Nothing
     <*> areq passwordField (bfs ("Senha: " :: Text)) Nothing
 
@@ -47,6 +47,9 @@ postLoginR :: Handler Html
 postLoginR = do 
     ((resultado,_),_) <- runFormPost formLogin
     case resultado of
+        FormSuccess ("ademir@admin.com","admin") -> do 
+            setSession "_NOME" "admin"
+            redirect AdmR
         FormSuccess (email,senha) -> do 
             talvezPrestador <- autentica email senha
             case talvezPrestador of 
@@ -58,7 +61,8 @@ postLoginR = do
                     redirect LoginR
                 Just (Entity chave pre) -> do 
                     setSession "_NOME" (prestadorNomePrest pre)
-                    redirect HomeR
+                    setSession "_ID" (pack $ show $ fromSqlKey chave)
+                    redirect $ PerfilPrestR $ chave
                 
         _ -> redirect HomeR
     

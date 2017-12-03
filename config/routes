@@ -8,8 +8,8 @@
 /denuncia/#PrestadorId                              DenunciaR           GET POST PATCH
 /busca                                              BuscaR              GET POST
 /prestador                                          PrestadorR          GET POST
-/prestador/#PrestadorId/perfil                      PerfilR             GET
-/prestador/#PrestadorId/perfilprest                 PerfilPrestR        GET
+/prestador/perfil/#PrestadorId                      PerfilR             GET
+/prestador/perfilprest/#PrestadorId                 PerfilPrestR        GET
 /login                                              LoginR              GET POST
 /contato                                            ContatoR            GET 
 /alteracao/#PrestadorId                             AlteracaoR          PUT

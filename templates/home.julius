@@ -1,6 +1,18 @@
     function initMap() {
                 var prestadores;
-    
+                var enderecos;
+                var geocoder = new google.maps.Geocoder();
+                //var endereco ="Guarujá, São Paulo, Brasil";
+                var posicoes;
+                var marcador = 'https://hasksigma-romefeller.c9users.io@{StaticR html_marcador_png}';
+                var medialat=0;
+                var medialong=0;
+                console.log("foi porra...");
+                var nome= "Marcos";
+                var servico = "Eletricista";
+                var telefone = "(13) 3377-7666";
+                
+                
                 jQuery(function($){
                     $.ajax({ 
                         url: 'https://hasksigma-romefeller.c9users.io@{ListarR}',
@@ -8,7 +20,7 @@
                         success: function (dados) {
                             prestadores = dados;
                             console.log(dados);
-                            continua();
+                            continua1();
                         },
                         error: function () {
                         }
@@ -16,57 +28,83 @@
                 });
                 
                 
-                function continua(){
+                function continua1(){
+                
                     console.log(prestadores);
                     var obj= prestadores.resp;
-                    for (var prestador in obj){
-                    console.log(prestador);
+                    
+                    for (var i in obj){
+                        console.log(obj[i].cepPrest);
+                        jQuery(function($){
+                            $.ajax({ 
+                                url: 'https://viacep.com.br/ws/'+ obj[i].cepPrest +'/json/',
+                                type: 'GET',
+                                success: function (dados) {
+                                    var resultado = dados;
+                                    if(Object.keys(resultado)[0]=="cep"){
+                                        var end= resultado.logradouro + ", " + resultado.bairro + ", " + obj[i].numEndPrest + ", " + resultado.localidade; 
+                                        enderecos.push(end);
+                                        console.log(end);
+                                        if((obj.length-1) == i){
+                                            geolocalizar(end , true)
+                                        }else{
+                                            geolocalizar(end , false);
+                                        }
+                                    }
+                                },
+                                error: function () {
+                                    if((obj.length-1) == i){
+                                        criaMapa();
+                                    }
+                                }
+                            });
+                        });
+                        
                     }
                     
                     
-                    var geocoder = new google.maps.Geocoder();
-                    var endereco ="Guarujá, São Paulo, Brasil";
-                    var posicao;
-                    var marcador = 'https://hasksigma-romefeller.c9users.io@{StaticR html_marcador_png}';
-                    var medialat=0;
-                    var medialong=0;
-                    console.log("foi porra...");
-                    var nome= "Marcos";
-                    var servico = "Eletricista";
-                    var telefone = "(13) 3377-7666";
+                    
+                    function geolocalizar(end , inicializa){
+                        geocoder.geocode( { 'address': end}, function(results, status) {
+        
+                          if (status == google.maps.GeocoderStatus.OK) {
+                            var posicao = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
+                            posicoes.push(posicao);
+                          }
+                        });
+                        if(inicializa){
+                            criaMapa();
+                        }
+                    }
+                   
                     
                     
-                    geocoder.geocode( { 'address': endereco}, function(results, status) {
-    
-                      if (status == google.maps.GeocoderStatus.OK) {
-                        posicao = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
-                        criaMapa();
-                      }
-                    });    
     
                     function criaMapa(){
                         console.log("foi MESMO porra...");
                         var map = new google.maps.Map(document.getElementById('map'), {
                             zoom: 13,
-                            center: posicao
+                            center: posicoes[0]
                         });
-    
-                        var marker = new google.maps.Marker({
-                            position: posicao,
-                            map: map,
-                            icon: marcador
-                        });
-    
-                        var informacao = "<div id=info><h3>"+nome+"</h3><br><b>Servico: </b>"+servico+"<br><b>Telefone: </b>"+telefone+"<br><b>Endereço: </b>"+endereco+" </div>";
-    
-                        var infowindow = new google.maps.InfoWindow({
-                          content: informacao
-                        });
-    
-                        marker.addListener('click', function() {
-                            infowindow.open(map, marker);                     
-                        });
-    
+                        
+                        for (var i in posicoes){
+                            console.log(i)
+                            var marker = new google.maps.Marker({
+                                position: posicoes[i],
+                                map: map,
+                                icon: marcador
+                            });
+        
+                            var informacao = "<div id=info><h3>"+nome+"</h3><br><b>Servico: </b>"+servico+"<br><b>Telefone: </b>"+telefone+"<br><b>Endereço: </b>"+endereco+" </div>";
+        
+                            var infowindow = new google.maps.InfoWindow({
+                              content: informacao
+                            });
+        
+                            marker.addListener('click', function() {
+                                infowindow.open(map, marker);                     
+                            });
+                        }
                     }
                 }
             }
