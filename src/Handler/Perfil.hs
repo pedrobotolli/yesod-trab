@@ -98,7 +98,6 @@ getPerfilPrestR pid = do
     (widget, enctype) <- generateFormPost $ formPerfilPrest prestador
     defaultLayout $ do
         setTitle "Service Provider Finder"
-        toWidget $(juliusFile "templates/requisicaoput.julius")
         $(whamletFile "templates/perfilprest.hamlet")
 
 

@@ -1,109 +1,126 @@
-    function initMap() {
-                var prestadores;
-                var enderecos= Array();
-                var geocoder = new google.maps.Geocoder();
-                //var endereco ="Guarujá, São Paulo, Brasil";
-                var posicoes;
-                var marcador = 'https://hasksigma-romefeller.c9users.io@{StaticR html_marcador_png}';
-                var medialat=0;
-                var medialong=0;
-                console.log("foi porra...");
-                var nome= "Marcos";
-                var servico = "Eletricista";
-                var telefone = "(13) 3377-7666";
-                
-                
-                jQuery(function($){
-                    $.ajax({ 
-                        url: 'https://hasksigma-romefeller.c9users.io@{ListarR}',
-                        type: 'GET',
-                        success: function (dados) {
-                            prestadores = dados;
-                            console.log(dados);
-                            continua1();
-                        },
-                        error: function () {
-                        }
-                    });
-                });
-                
-                
-                function continua1(){
-                
-                    console.log(prestadores);
-                    var obj= prestadores.resp;
-                    
-                    for (var i in obj){
-                        console.log(obj[i].cepPrest);
-                        jQuery(function($){
-                            $.ajax({ 
-                                url: 'https://viacep.com.br/ws/'+ obj[i].cepPrest +'/json/',
-                                type: 'GET',
-                                success: function (resultado) {
-                                    if(Object.keys(resultado)[0]=="cep"){
-                                        var end= resultado.logradouro + ", " + resultado.bairro + ", " + obj[i].numEndPrest + ", " + resultado.localidade; 
-                                        enderecos.push(end);
-                                        console.log(end);
-                                        if((obj.length-1) == i){
-                                            geolocalizar(end , true)
-                                        }else{
-                                            geolocalizar(end , false);
-                                        }
-                                    }
-                                },
-                                error: function () {
-                                    if((obj.length-1) == i){
-                                        criaMapa();
-                                    }
-                                }
-                            });
-                        });
-                        
-                    }
-                    
-                    
-                    
-                    function geolocalizar(end , inicializa){
-                        geocoder.geocode( { 'address': end}, function(results, status) {
-        
-                          if (status == google.maps.GeocoderStatus.OK) {
-                            var posicao = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
-                            posicoes.push(posicao);
-                          }
-                        });
-                        if(inicializa ==true){
-                            criaMapa();
-                        }
-                    }
-                   
-                    
-                    
+function initMap() {
+    var posicoes= Array();
+    var funcionam =  Array();
+        jQuery(function($){
+            $.ajax({ 
+                url: 'https://hasksigma-romefeller.c9users.io@{ListarR}',
+                type: 'GET',
+                success: function (dados) {
+                    continua1(dados);
+                },
+                error: function () {
+                    console.log("ERRO AO BUSCAR PRESTADORES: FUNÇÃO initMap");
+                }
+            });
+        });
+
+
+function bindInfoWindow(marker, map, infowindow, html) {
+    marker.addListener('click', function() {
+        infowindow.setContent(html);
+        infowindow.open(map, this);
+    });
+} 
     
-                    function criaMapa(){
-                        console.log("foi MESMO porra...");
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 13,
-                            center: posicoes[0]
-                        });
-                        
-                        for (var i in posicoes){
-                            console.log(i)
-                            var marker = new google.maps.Marker({
-                                position: posicoes[i],
-                                map: map,
-                                icon: marcador
-                            });
+    function pausecomp(millis){
+        var date = new Date();
+        var curDate = null;
+        do { curDate = new Date(); }
+        while(curDate-date < millis);
+    }
+                    
+    function criaMapa(){
+        var marcador = 'https://hasksigma-romefeller.c9users.io@{StaticR html_marcador_png}';
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: posicoes[0]
+        });
+        for (var i in posicoes){
+            console.log(i)
+            var marker = new google.maps.Marker({
+                position: posicoes[i],
+                map: map,
+                icon: marcador,
+                title: obj[funcionam[i]].nomePrest
+            });
+            console.log(obj[funcionam[i]].nomePrest + " " + obj[funcionam[i]].cepPrest)
+            informacao='<div id=info><h3>'+ marker.title +'</h3><br><b>Servico: </b>SERVICO<br><b>Telefone: </b>TELEFONE<br><b>Endereço: </b>ENDERECO </div>';
+            var infowindow = new google.maps.InfoWindow();
+
+            bindInfoWindow(marker, map, infowindow, informacao); 
+
+        }
+    }
+    
+    /**/
+    
+    function geolocalizar(end , inicializa, indice){
+        var status;
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': end}, function(results, status) {
         
-                            var informacao = "<div id=info><h3>"+nome+"</h3><br><b>Servico: </b>"+servico+"<br><b>Telefone: </b>"+telefone+"<br><b>Endereço: </b>"+endereco+" </div>";
-        
-                            var infowindow = new google.maps.InfoWindow({
-                              content: informacao
-                            });
-        
-                            marker.addListener('click', function() {
-                                infowindow.open(map, marker);                     
-                            });
+        if (status == google.maps.GeocoderStatus.OK) {
+                var posicao = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
+                posicoes.push(posicao);
+                funcionam.push(indice);
+            }
+            if(inicializa ==true){
+                console.log(posicoes[0]);
+                console.log(posicoes[1]);
+                console.log(posicoes[2]);
+                criaMapa();
+            }
+        });
+    }
+
+
+    function getEndereco (cep,num,std,indice){
+        var enderecos= Array();
+        jQuery(function($){
+        $.ajax({ 
+            url: 'https://viacep.com.br/ws/'+ cep +'/json/',
+            type: 'GET',
+                success: function (resultado) {
+                    if(Object.keys(resultado)[0]=="cep"){
+                        var end= resultado.logradouro + ", " + resultado.bairro + ", " + num + ", " + resultado.localidade; 
+                        enderecos.push(end);
+                        if(std == true){
+                            geolocalizar(end , true, indice);
+                        }else{
+                            geolocalizar(end , false, indice);
                         }
+                    }
+                },
+                error: function () {
+                    console.log("ERRO: "+ "https://viacep.com.br/ws/"+ cep +"/json/");
+                    if(std == true){
+                        criaMapa();
                     }
                 }
+            });
+        });
+    }
+
+    function continua1(prestadores){
+        var cep;
+        var num;
+        obj= prestadores.resp;
+        var tot = obj.length;
+        console.log(obj);
+        
+        for (var count = 0; count < tot; count++){
+            pausecomp(200);
+            cep = obj[count].cepPrest.replace(/[^a-z0-9]/gi,'');
+            num = obj[count].numEndPrest;
+            if((tot-1) == count){
+                getEndereco (cep,num,true,count);
+            }else{
+                getEndereco (cep,num,false,count);
             }
+        }
+    }
+    
+
+
+
+}
