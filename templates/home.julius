@@ -120,8 +120,9 @@ function bindInfoWindow(marker, map, infowindow, html) {
     function continua1(prestadores){
         var cep;
         var num;
-        obj= prestadores.resp;
+        obj = prestadores.resp;
         var tot = obj.length;
+        
         
         for (var count = 0; count < tot; count++){
             pausecomp(200);

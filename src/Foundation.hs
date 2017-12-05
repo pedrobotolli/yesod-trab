@@ -27,13 +27,14 @@ instance Yesod App where
         pc <- widgetToPageContent $ do
             widget
         withUrlRenderer $(hamletFile "templates/layout.hamlet")
-    {-
     authRoute _ = Just LoginR
+    isAuthorized (StaticR _) _ = return Authorized
+    isAuthorized ListarR _ = return Authorized
     isAuthorized LoginR _ = return Authorized
     isAuthorized HomeR _ = return Authorized
     isAuthorized AdmR _ = ehAdmin
     isAuthorized _ _ = ehUsuario
-    -}
+    
 
 ehAdmin :: Handler AuthResult
 ehAdmin = do 
