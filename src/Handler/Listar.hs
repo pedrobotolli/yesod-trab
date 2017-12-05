@@ -21,6 +21,6 @@ getListarR = do
     
     profids <- return $ fmap prestProfiProfissaoId prestprofi --[Handler ProfissaoId]
     profissoes <- sequence $ fmap (\profid -> runDB $ get404 profid) profids -- Handler [Profissoes]
-    prestadorprofissao <- return $ zip prestadores profissoes
+    prestadorprofissao <- return $ zip3 prestadores profissoes prestids
 
     sendStatusJSON ok200 (object ["resp" .= (toJSON prestadorprofissao)])

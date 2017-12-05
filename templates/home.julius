@@ -45,7 +45,7 @@ function bindInfoWindow(marker, map, infowindow, html) {
                 icon: marcador,
                 title: (obj[funcionam[i]])[0].nomePrest
             });
-            informacao="<div id=info><h3>"+ marker.title +"</h3><br><b>Servico: </b>"+(obj[funcionam[i]])[1].nomeProfissao+"<br><b>Telefone: </b>"+(obj[funcionam[i]])[0].telPrest+"<br><b>Endereço: </b>"+enderecos[funcionam[i]]+" <br><br> <a class='btn ' href='https://hasksigma-romefeller.c9users.io/prestador/perfil/"+(obj[funcionam[i]])[0].id+"'>Ver Mais</a> </div>";
+            informacao="<div id=info><h3>"+ marker.title +"</h3><br><b>Servico: </b>"+(obj[funcionam[i]])[1].nomeProfissao+"<br><b>Telefone: </b>"+(obj[funcionam[i]])[0].telPrest+"<br><b>Endereço: </b>"+enderecos[funcionam[i]]+" <br><br> <a class='btn ' href='https://hasksigma-romefeller.c9users.io/prestador/perfil/"+(obj[funcionam[i]])[2]+"'>Ver Mais</a> </div>";
             var infowindow = new google.maps.InfoWindow();
 
             bindInfoWindow(marker, map, infowindow, informacao); 
