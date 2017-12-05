@@ -1,6 +1,7 @@
 function initMap() {
     var posicoes= Array();
     var funcionam =  Array();
+    var enderecos= Array();
         jQuery(function($){
             $.ajax({ 
                 url: 'https://hasksigma-romefeller.c9users.io@{ListarR}',
@@ -31,6 +32,7 @@ function bindInfoWindow(marker, map, infowindow, html) {
                     
     function criaMapa(){
         var marcador = 'https://hasksigma-romefeller.c9users.io@{StaticR html_marcador_png}';
+        console.log(funcionam);
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,
             center: posicoes[0]
@@ -41,15 +43,28 @@ function bindInfoWindow(marker, map, infowindow, html) {
                 position: posicoes[i],
                 map: map,
                 icon: marcador,
-                title: obj[funcionam[i]].nomePrest
+                title: (obj[funcionam[i]])[0].nomePrest
             });
-            console.log(obj[funcionam[i]].nomePrest + " " + obj[funcionam[i]].cepPrest)
-            informacao='<div id=info><h3>'+ marker.title +'</h3><br><b>Servico: </b>SERVICO<br><b>Telefone: </b>TELEFONE<br><b>Endereço: </b>ENDERECO </div>';
+            informacao="<div id=info><h3>"+ marker.title +"</h3><br><b>Servico: </b>"+(obj[funcionam[i]])[1].nomeProfissao+"<br><b>Telefone: </b>"+(obj[funcionam[i]])[0].telPrest+"<br><b>Endereço: </b>"+enderecos[funcionam[i]]+" <br><br> <a class='btn ' href='https://hasksigma-romefeller.c9users.io/prestador/perfil/"+(obj[funcionam[i]])[0].id+"'>Ver Mais</a> </div>";
             var infowindow = new google.maps.InfoWindow();
 
             bindInfoWindow(marker, map, infowindow, informacao); 
 
         }
+        /*
+        var searchBox = new google.maps.places.SearchBox(document.getElementById("busca"));
+        google.maps.event.addListener(searchBox,'places_changed',function(){
+            var places = searchBox.getPlaces();
+            var bounds = new google.maps.LatLngBounds();
+            var i,place;
+            
+            for(i=0;place[i];i++){
+                bounds.extend(place.geometry.location);
+            }
+            map.fitBounds(bounds);
+            map.setZoom(12);
+        });
+        */
     }
     
     /**/
@@ -75,7 +90,7 @@ function bindInfoWindow(marker, map, infowindow, html) {
 
 
     function getEndereco (cep,num,std,indice){
-        var enderecos= Array();
+        
         jQuery(function($){
         $.ajax({ 
             url: 'https://viacep.com.br/ws/'+ cep +'/json/',
@@ -93,6 +108,7 @@ function bindInfoWindow(marker, map, infowindow, html) {
                 },
                 error: function () {
                     console.log("ERRO: "+ "https://viacep.com.br/ws/"+ cep +"/json/");
+                    enderecos.push("erro");
                     if(std == true){
                         criaMapa();
                     }
@@ -106,12 +122,11 @@ function bindInfoWindow(marker, map, infowindow, html) {
         var num;
         obj= prestadores.resp;
         var tot = obj.length;
-        console.log(obj);
         
         for (var count = 0; count < tot; count++){
             pausecomp(200);
-            cep = obj[count].cepPrest.replace(/[^a-z0-9]/gi,'');
-            num = obj[count].numEndPrest;
+            cep = (obj[count])[0].cepPrest.replace(/[^a-z0-9]/gi,'');
+            num = (obj[count])[0].numEndPrest;
             if((tot-1) == count){
                 getEndereco (cep,num,true,count);
             }else{
