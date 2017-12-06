@@ -20,4 +20,4 @@
 /recuperacao                                        RecuperacaoR        GET
 /listar                                             ListarR             GET
 /adicionarprofissoes/#PrestadorId                   AdicionarProfiR     GET POST
-/removerprofissoes/#PrestadorId                     RemoverProfiR       GET POST
+/removerprofissoes/#PrestadorId                     RemoverProfiR       GET

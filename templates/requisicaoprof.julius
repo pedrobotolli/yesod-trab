@@ -1,0 +1,8 @@
+function deletarProfissao(e, url){
+	$.ajax(url, {method:"POST"}).done(function(){
+		console.log(e);
+		$(e).closest('tr').remove();
+	}).fail(function(){
+		alert("deu ruim");
+	});
+}

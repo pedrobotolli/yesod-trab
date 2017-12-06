@@ -57,6 +57,12 @@ postAdicionarProfiR pid = do
         
 getRemoverProfiR :: PrestadorId -> Handler Html
 getRemoverProfiR pid = do
+    prestprofi' <- runDB $ selectList [PrestProfiPrestadorId ==. pid] [] :: Handler [Entity PrestProfi]
+    prestprofi <- return $ fmap (\(Entity _ pro) -> pro) prestprofi' --Handler [PrestProfi]
+    profids <- return $ fmap prestProfiProfissaoId prestprofi -- [Handler PrestadorId]
+    profissoes <- sequence $ fmap (\proid -> runDB $ get404 proid) profids -- Handler [Prestador]
+    prestador <- runDB $ get404 pid
+    prestadorprofissao <- return $ Import.zip profissoes prestprofi
     defaultLayout $ do
         setTitle "Service Provider Finder"
         [whamlet|
@@ -73,21 +79,16 @@ getRemoverProfiR pid = do
                                     <td> 
                                         Nome do Prestador
                                     <td>
-                                        Data da Denúncia
-                                    <td>
-                                        Descrição da Denúncias
+                                        Profissão
                             <tbody>
-                                $forall (Entity did denuncia, prestador) <- prestadordenuncia
-                                    <tr id=#{show $fromSqlKey did}> 
-                                        <td>#{prestadorNomePrest prestador}
-                                        <td>#{show $ denunciaDtDenuncia denuncia}
-                                        <td>#{denunciaDsDenuncia denuncia}
-                                        <td><buttom type="buttom" onclick="deletarPrestador(this,'@{DenunciaR $ denunciaPrestadorId denuncia}')"  class="btn btn-danger" >Banir 
+                                $forall (profissao, prestprofi) <- prestadorprofissao
+                                    <tr> 
+                                        <td>#{profissaoNomeProfissao profissao}
+                                        <td><buttom type="buttom" onclick="deletarProfissao(this,'@{RemoverProfiR $ prestProfiPrestadorId prestprofi}')"  class="btn btn-danger" >Banir 
             
                           
                           
                         <a class="btn btn-secondary btn-lg pull-right" href=@{ListaContatoR}>Mensagens
-
-
         
         |]
+   
