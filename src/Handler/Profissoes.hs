@@ -18,6 +18,31 @@ import Yesod.Form.Bootstrap3
 
 getAddProfiR :: Handler Html
 getAddProfiR = do
+    (widget, enctype) <- generateFormPost formAddProf
     defaultLayout $ do
         setTitle "Service Provider Finder"
-        $(whamletFile "templates/addprof.hamlet")
+        [whamlet|
+            <section id="portfolio">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <br>
+                            <legend>
+                                <h2>Adicionar Nova Profissão
+                                
+                
+                <br>
+                <div class="container">
+                    <form action=@{addProfiR} method=post enctype=#{enctype}>
+                        ^{widget}
+                    <br>
+                                
+                    <input type="submit" class="btn btn-primary" value="Enviar">
+        
+        |]
+        
+formAddProf :: Html -> MForm Handler (FormResult PrestProfi), Widget)
+formAddProf = renderBootstrap $
+    <$> areq (selectField $ optionsPersistKey [] [Asc ProfissaoNomeProfissao] profissaoNomeProfissao) (bfs ("Profissão: " ::Text)) Nothing 
+    <*> pure (toSqlKey 0)
+    
