@@ -97,7 +97,7 @@ postBuscaR = do
 formCont :: Form Contato
 formCont = renderBootstrap $ Contato 
     <$> areq textField (bfs ("Nome: " ::Text)) Nothing -- c
-    <*> areq textField (bfs ("Email: " ::Text)) Nothing -- c
+    <*> areq emailField (bfs ("Email: " ::Text)) Nothing -- c
     <*> areq textField (bfs ("Assunto: " ::Text)) Nothing -- c
     <*> areq textareaField (bfs ("Mensagem: " ::Text)) Nothing -- c
     <*> fmap utctDay (lift $ liftIO getCurrentTime)
