@@ -38,7 +38,5 @@
                                     <label>Descrição
                                     <textarea name="curriculo" class="form-control" rows="10" cols="50" readonly> #{prestadorCurriculoPrest prestador}
                                     <br>
-                                    <input type="button" class="btn btn-primary btn-lg pull-right" value="Solicitar Serviço">
                                     <a class="btn btn-primary btn-lg pull-right" href=@{DenunciaR pid}> Denunciar
-                                    <input type="button" class="btn btn-primary btn-lg pull-right" value="Indicar">
                         <br>

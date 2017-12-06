@@ -5,20 +5,8 @@
                 <h2>Contato
         <div class="row justify-content-center">
             <div class="col-md-offset-4 col-md-4 text-center">
-                <form>
-                    <fieldset>
-                        <legend>Entre em contato conosco
-                        <p>
-                            <label>Nome
-                            <input type="text" name="nome" class="form-control" value="" />
-                        <p>
-                            <label>E-mail
-                            <input type="text" class="form-control" name="email" value="" />
-                        <p>
-                            <label>Assunto
-                            <input type="text" class="form-control" name="assunto" value=""/>
-                        <p>
-                            <label>Mensagem
-                            <textarea class="form-control" name="mensagem" rows="10">
-                                
-                        <button type="submit" class="btn btn-primary btn-lg">Enviar
+                <form action=@{ContatoR} method=post>
+                    ^{widget}
+                    <br>
+                    <br>
+                    <input type="submit" class="btn btn-primary btn-lg"  value="Enviar">

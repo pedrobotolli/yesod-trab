@@ -1,0 +1,32 @@
+<section id="portfolio">
+    <div class="container">
+        <div class="row text-center">
+            <h2>Mensagens
+            <legend>
+        
+        <div class="col-md-8 col-md-offset-2 table-responsive">  
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td> 
+                            Nome do Contato
+                        <td> 
+                            Email do Contato
+                        <td> 
+                            Assunto
+                        <td>
+                            Mensagem
+                        <td>
+                            Data do Contato
+                        
+                <tbody>
+                    $forall (Entity mid mensagem) <- mensagens
+                        <tr id=#{show $fromSqlKey mid}> 
+                            <td>#{contatoNomeContato mensagem}
+                            <td>#{contatoEmailContato mensagem}
+                            <td>#{contatoAssuntoContato mensagem}
+                            <td>#{contatoMensagemContato mensagem}
+                            <td>#{show $ contatoDtContato mensagem}
+                            <td><buttom type="buttom" onclick="deletarMensagem(this,'@{DeletaContatoR $ mid}')"  class="btn btn-danger" >Excluir 
+                            
+            <a class="btn btn-secondary btn-lg pull-right" href=@{AdmR}>Denúncias

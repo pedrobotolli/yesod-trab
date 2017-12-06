@@ -60,3 +60,17 @@ patchDenunciaR pid = do
     runDB $ update pid [PrestadorContaAtivadaPrest =. False]
     runDB $ deleteWhere [DenunciaPrestadorId ==. pid]
     sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey pid)])
+    
+getListaContatoR :: Handler Html
+getListaContatoR = do
+    mensagens <- runDB $ selectList [] [] :: Handler [Entity Contato]
+    defaultLayout $ do
+        setTitle "Service Provider Finder"
+        toWidget $(juliusFile "templates/requisicaocont.julius")
+        $(whamletFile "templates/mensagens.hamlet")
+        
+deleteDeletaContatoR :: ContatoId -> Handler Value
+deleteDeletaContatoR cid = do 
+    _ <- runDB $ get404 cid
+    runDB $ delete cid
+    sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey cid)])

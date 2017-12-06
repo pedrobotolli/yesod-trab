@@ -1,15 +1,15 @@
 Prestador json
-    cpfPrest    Text
-    senhaPrest  Text
-    nomePrest   Text
-    emailPrest  Text
-    telPrest    Text
-    curriculoPrest  Text
-    cepPrest    Text
-    numEndPrest Text
-    contaAtivadaPrest Bool default=FALSE
-    fotoPrest   Text 
-    UniqueEmail emailPrest
+    cpfPrest            Text
+    senhaPrest          Text    
+    nomePrest           Text
+    emailPrest          Text
+    telPrest            Text
+    curriculoPrest      Text
+    cepPrest            Text
+    numEndPrest         Text
+    contaAtivadaPrest   Bool default=TRUE
+    fotoPrest           Text 
+    UniqueEmail         emailPrest
     deriving Show
 
 Profissao json
@@ -32,11 +32,17 @@ Denuncia
     deriving Show
 
 Admin json
-    nomeAdmin Text
-    emailAdmin  Text
-    senhaAdmin  Text
-    UniqueEmailAdm emailAdmin
+    nomeAdmin       Text
+    emailAdmin      Text
+    senhaAdmin      Text
+    UniqueEmailAdm  emailAdmin
     deriving Show
-
+    
+Contato
+    nomeContato     Text
+    emailContato    Text
+    assuntoContato  Text
+    mensagemContato Textarea
+    dtContato       Day default=CURRENT_DATE
 
     

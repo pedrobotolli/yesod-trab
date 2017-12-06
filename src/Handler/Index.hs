@@ -12,7 +12,9 @@ import Text.Julius
 import Text.Hamlet
 import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
-
+import Data.Time
+import Yesod.Form
+import Yesod.Form.Bootstrap3
 getHomeR :: Handler Html
 getHomeR = do
     prestadores <- runDB $ selectList [] [] :: Handler [Entity Prestador]
@@ -92,12 +94,30 @@ postBuscaR = do
     sendStatusJSON ok200 (object ["resp" .= (toJSON buscares)])
 
 
+formCont :: Form Contato
+formCont = renderBootstrap $ Contato 
+    <$> areq textField (bfs ("Nome: " ::Text)) Nothing -- c
+    <*> areq textField (bfs ("Email: " ::Text)) Nothing -- c
+    <*> areq textField (bfs ("Assunto: " ::Text)) Nothing -- c
+    <*> areq textareaField (bfs ("Mensagem: " ::Text)) Nothing -- c
+    <*> fmap utctDay (lift $ liftIO getCurrentTime)
         
 getContatoR :: Handler Html
 getContatoR = do
+    (widget,enctype) <- generateFormPost $ formCont
     defaultLayout $ do
         setTitle "Service Provider Finder"
         $(whamletFile "templates/contato.hamlet")
+        
+        
+postContatoR :: Handler Html
+postContatoR = do
+    ((result,_),_) <- runFormPost $ formCont
+    case result of
+        FormSuccess contato -> do
+            runDB $ insert contato
+            redirect HomeR
+        _ -> redirect HomeR
         
 
         

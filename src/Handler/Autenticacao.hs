@@ -41,29 +41,37 @@ patchNovaSenhaR pid senha = do
 
 autentica :: Text -> Text -> HandlerT App IO (Maybe (Entity Prestador))
 autentica email senha = runDB $ selectFirst [PrestadorEmailPrest ==. email
-                                            ,PrestadorSenhaPrest ==. senha] []
+                                            ,PrestadorSenhaPrest ==. senha
+                                            ,PrestadorContaAtivadaPrest ==. True] []
+                                            
+autenticaAdmin :: Text -> Text -> HandlerT App IO (Maybe (Entity Admin))
+autenticaAdmin email senha = runDB $ selectFirst [AdminEmailAdmin ==. email
+                                            ,AdminSenhaAdmin ==. senha] []
 
 postLoginR :: Handler Html
 postLoginR = do 
     ((resultado,_),_) <- runFormPost formLogin
     case resultado of
-        FormSuccess ("ademir@admin.com","admin") -> do 
-            setSession "_NOME" "admin"
-            redirect AdmR
         FormSuccess (email,senha) -> do 
             talvezPrestador <- autentica email senha
-            case talvezPrestador of 
-                Nothing -> do 
-                    setMessage [shamlet|
-                        <div> 
-                            Prestador nao encontrado/Senha invalida!
-                    |]
-                    redirect LoginR
-                Just (Entity chave pre) -> do 
-                    setSession "_NOME" (prestadorNomePrest pre)
-                    setSession "_ID" (pack $ show $ fromSqlKey chave)
-                    redirect $ PerfilPrestR $ chave
+            talvezAdmin <- autenticaAdmin email senha
+            case talvezAdmin of
+                Just (Entity chave admin) -> do
+                   setSession "_NOME" "admin"
+                   redirect AdmR 
                 
+                Nothing -> do
+                    case talvezPrestador of 
+                        Nothing -> do 
+                            setMessage [shamlet|
+                                <div> 
+                                Prestador nao encontrado/Senha invalida!
+                            |]
+                            redirect LoginR
+                        Just (Entity chave pre) -> do 
+                            setSession "_NOME" (prestadorNomePrest pre)
+                            setSession "_ID" (pack $ show $ fromSqlKey chave)
+                            redirect $ PerfilPrestR $ chave
         _ -> redirect HomeR
     
 
