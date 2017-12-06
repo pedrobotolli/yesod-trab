@@ -16,9 +16,9 @@ import Prelude
 import Yesod.Form
 import Yesod.Form.Bootstrap3
 
-getAddProfiR :: Handler Html
-getAddProfiR = do
-    (widget, enctype) <- generateFormPost formAddProf
+getAdicionarProfiR :: PrestadorId -> Handler Html
+getAdicionarProfiR pid = do
+    (widget, enctype) <- generateFormPost formAdicionarProf
     defaultLayout $ do
         setTitle "Service Provider Finder"
         [whamlet|
@@ -33,7 +33,7 @@ getAddProfiR = do
                 
                 <br>
                 <div class="container">
-                    <form action=@{addProfiR} method=post enctype=#{enctype}>
+                    <form action=@{AdicionarProfiR pid} method=post enctype=#{enctype}>
                         ^{widget}
                     <br>
                                 
@@ -41,8 +41,16 @@ getAddProfiR = do
         
         |]
         
-formAddProf :: Html -> MForm Handler (FormResult PrestProfi), Widget)
-formAddProf = renderBootstrap $
+formAdicionarProf :: Html -> MForm Handler (FormResult PrestProfi, Widget)
+formAdicionarProf = renderBootstrap $ PrestProfi
     <$> areq (selectField $ optionsPersistKey [] [Asc ProfissaoNomeProfissao] profissaoNomeProfissao) (bfs ("Profissão: " ::Text)) Nothing 
     <*> pure (toSqlKey 0)
-    
+
+postAdicionarProfiR :: PrestadorId -> Handler Html
+postAdicionarProfiR pid = do
+    ((result,_),_) <- runFormPost formAdicionarProf
+    case result of
+        FormSuccess profissao -> do
+            runDB $ insert $ PrestProfi (prestProfiProfissaoId profissao) pid
+            redirect PrestadorR
+        _ -> redirect HomeR

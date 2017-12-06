@@ -42,6 +42,7 @@ import Handler.Entrar
 import Handler.Prestador
 import Handler.Perfil
 import Handler.Autenticacao
+import Handler.Profissoes
 import Handler.Adm
 import Handler.Listar
 
