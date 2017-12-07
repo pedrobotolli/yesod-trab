@@ -62,9 +62,10 @@ getRemoverProfiR pid = do
     profids <- return $ fmap prestProfiProfissaoId prestprofi -- [Handler PrestadorId]
     profissoes <- sequence $ fmap (\proid -> runDB $ get404 proid) profids -- Handler [Prestador]
     prestador <- runDB $ get404 pid
-    prestadorprofissao <- return $ Import.zip profissoes prestprofi
+    prestadorprofissao <- return $ Import.zip profissoes prestprofi'
     defaultLayout $ do
         setTitle "Service Provider Finder"
+        toWidget $(juliusFile "templates/requisicaoprof.julius")
         [whamlet|
             <section id="portfolio">
                 <div class="container">
@@ -79,12 +80,12 @@ getRemoverProfiR pid = do
                                     <td> 
                                         Nome do Prestador
                                     <td>
-                                        Profissão
+                                        Profissao
                             <tbody>
-                                $forall (profissao, prestprofi) <- prestadorprofissao
+                                $forall (profissao, Entity chave prestprofi) <- prestadorprofissao
                                     <tr> 
                                         <td>#{profissaoNomeProfissao profissao}
-                                        <td><buttom type="buttom" onclick="deletarProfissao(this,'@{RemoverProfiR $ prestProfiPrestadorId prestprofi}')"  class="btn btn-danger" >Banir 
+                                        <td><buttom type="buttom" onclick="deletarProfissao(this,'@{RemoverR chave}')"  class="btn btn-danger" >Deletar 
             
                           
                           
@@ -92,3 +93,8 @@ getRemoverProfiR pid = do
         
         |]
    
+postRemoverR :: PrestProfiId -> Handler Html
+postRemoverR prepro = do
+    _ <- runDB $ get404 prepro
+    runDB $ delete prepro
+    sendStatusJSON noContent204 (object ["resp" .= (prepro)])
