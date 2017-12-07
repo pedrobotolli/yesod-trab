@@ -38,6 +38,9 @@ instance Yesod App where
     isAuthorized (PerfilR _) _ = return Authorized
     isAuthorized ContatoR _ = return Authorized
     isAuthorized AdmR _ = ehAdmin
+    isAuthorized AdmProfiR _ = ehAdmin
+    isAuthorized ListaContatoR _ = ehAdmin
+    isAuthorized (DeletaContatoR _) _= ehAdmin
     isAuthorized _ _ = ehUsuario
 
 ehAdmin :: Handler AuthResult

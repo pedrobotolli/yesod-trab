@@ -100,6 +100,10 @@ getAdmProfiR = do
                     <br>
                                 
                     <input type="submit" class="btn btn-primary" value="Enviar">
+            <div class="col-md-12">
+                <a class="btn btn-secondary btn-lg pull-right" href=@{ListaContatoR}>Mensagens
+                <br><br>
+                <a class="btn btn-secondary btn-lg pull-right" href=@{AdmR}>Denúncias
         |]
 
 postAdmProfiR :: Handler Html

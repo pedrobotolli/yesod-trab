@@ -23,6 +23,8 @@
                             <td><buttom type="buttom" onclick="deletarPrestador(this,'@{DenunciaR $ denunciaPrestadorId denuncia}')"  class="btn btn-danger" >Banir 
 
               
-              
+        <div class="col-md-8 col-md-offset-2 ">  
             <a class="btn btn-secondary btn-lg pull-right" href=@{ListaContatoR}>Mensagens
+            <br><br>
+            <a class="btn btn-secondary btn-lg pull-right" href=@{AdmProfiR}>Adicionar Nova Profissao
 
