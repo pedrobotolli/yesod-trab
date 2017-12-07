@@ -11,6 +11,8 @@ import Text.Hamlet
 import Import.NoFoundation
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Yesod.Core.Types     (Logger)
+import Yesod.Default.Config (appExtra)
+
 
 data App = App
     { appSettings    :: AppSettings
@@ -37,7 +39,6 @@ instance Yesod App where
     isAuthorized ContatoR _ = return Authorized
     isAuthorized AdmR _ = ehAdmin
     isAuthorized _ _ = ehUsuario
-    
 
 ehAdmin :: Handler AuthResult
 ehAdmin = do 

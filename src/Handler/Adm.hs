@@ -74,3 +74,39 @@ deleteDeletaContatoR cid = do
     _ <- runDB $ get404 cid
     runDB $ delete cid
     sendStatusJSON noContent204 (object ["resp" .= (fromSqlKey cid)])
+
+
+formAdmProfiR :: Form Profissao
+formAdmProfiR = renderBootstrap $ Profissao
+    <$> areq textField (bfs ("Profissão:" ::Text)) Nothing
+
+
+getAdmProfiR :: Handler Html
+getAdmProfiR = do 
+    (widget, enctype) <- generateFormPost formAdmProfiR
+    defaultLayout $ do
+        [whamlet|
+            <section id="portfolio">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <br>
+                            <legend><h2>Adicionar Profissões Novas
+                
+                <br>
+                <div class="container">
+                    <form action=@{AdmProfiR} method=post enctype=#{enctype}>
+                        ^{widget}
+                    <br>
+                                
+                    <input type="submit" class="btn btn-primary" value="Enviar">
+        |]
+
+postAdmProfiR :: Handler Html
+postAdmProfiR = do
+    ((result,_),_) <- runFormPost formAdmProfiR
+    case result of
+        FormSuccess profissao -> do
+            runDB $ insert profissao
+            redirect AdmProfiR
+        _ -> redirect AdmR
