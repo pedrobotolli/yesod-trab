@@ -13,3 +13,5 @@
                             ^{widget}
                             <input type="submit" class="btn btn-primary btn-lg pull-right" value="Alterar">
                         <br>
+                        <a class="btn btn-primary btn-lg pull-right" href=@{AdicionarProfiR pid}> Denunciar
+                        <a class="btn btn-primary btn-lg pull-right" href=@{RemoverProfiR pid}> Denunciar
