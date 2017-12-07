@@ -21,4 +21,4 @@
 /listar                                             ListarR             GET
 /adicionarprofissoes/#PrestadorId                   AdicionarProfiR     GET POST
 /removerprofissoes/#PrestadorId                     RemoverProfiR       GET 
-/remover/#PrestProfiId                    RemoverR            POST 
+/remover/#PrestProfiId                              RemoverR            POST 
